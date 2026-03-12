@@ -230,6 +230,40 @@ a {
   gap: var(--space-xs) var(--space-lg);
 }
 
+.nav-controls {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.22rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.lang-btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.28rem 0.62rem;
+  font: inherit;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.77rem;
+  letter-spacing: 0.04em;
+  color: #bac4d4;
+  background: transparent;
+  cursor: pointer;
+}
+
+.lang-btn[aria-pressed="true"] {
+  color: #081017;
+  background: linear-gradient(180deg, #9dc2de, #7ca0be);
+}
+
 .site-nav a {
   text-decoration: none;
   color: var(--muted);
@@ -696,6 +730,10 @@ code {
 
   .mobile-nav-toggle {
     display: inline-flex;
+  }
+
+  .nav-controls {
+    margin-left: 0;
   }
 
   .site-nav {
