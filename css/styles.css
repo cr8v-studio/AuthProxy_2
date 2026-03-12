@@ -260,7 +260,8 @@ a {
 
 .scramble-char {
   display: inline-block;
-  min-width: 0.28em;
+  min-width: 0.52ch;
+  text-align: center;
   transition: transform 0.12s ease;
 }
 

@@ -48,8 +48,8 @@
 
   const scrambleTargets = document.querySelectorAll('.scramble-text');
   const scrambleAlphabet = '.:';
-  const scrambleRadius = 110;
-  const scrambleCooldownMs = 240;
+  const scrambleRadius = 145;
+  const scrambleFalloffMs = 380;
 
   function splitToChars(node) {
     const source = node.textContent || '';
@@ -64,63 +64,72 @@
       span.className = 'scramble-char';
       span.textContent = ch;
       span.dataset.original = ch;
-      span.dataset.lastRun = '0';
       fragment.appendChild(span);
     }
     node.textContent = '';
     node.appendChild(fragment);
   }
 
-  function scrambleChar(charNode, intensity) {
-    if (!charNode || charNode.dataset.animating === '1') return;
-
-    const now = Date.now();
-    const last = Number(charNode.dataset.lastRun || '0');
-    if (now - last < scrambleCooldownMs) return;
-
-    charNode.dataset.animating = '1';
-    charNode.dataset.lastRun = String(now);
-    const original = charNode.dataset.original || charNode.textContent || '';
-    const duration = 180 + Math.round(intensity * 420);
-    const start = performance.now();
-
-    function frame(ts) {
-      const progress = Math.min((ts - start) / duration, 1);
-      if (progress >= 1) {
-        charNode.textContent = original;
-        charNode.dataset.animating = '0';
-        return;
-      }
-
-      const pool = Math.max(1, Math.round(intensity * 4));
-      if (Math.random() < 0.7 + intensity * 0.2) {
-        const index = Math.floor(Math.random() * pool) % scrambleAlphabet.length;
-        charNode.textContent = scrambleAlphabet[index];
-      }
-      requestAnimationFrame(frame);
-    }
-
-    requestAnimationFrame(frame);
-  }
-
   scrambleTargets.forEach(function (target) {
     splitToChars(target);
     const chars = target.querySelectorAll('.scramble-char');
+    let pointerX = -9999;
+    let pointerY = -9999;
+    let lastPointerAt = 0;
+    let rafId = 0;
 
-    function trigger(x, y) {
+    function render(now) {
+      const alive = Math.max(0, 1 - (now - lastPointerAt) / scrambleFalloffMs);
+      let hasActivity = alive > 0.01;
+
       chars.forEach(function (charNode) {
+        const original = charNode.dataset.original || '';
+        if (original.trim().length === 0) return;
+
         const rect = charNode.getBoundingClientRect();
         const cx = rect.left + rect.width / 2;
         const cy = rect.top + rect.height / 2;
-        const distance = Math.hypot(cx - x, cy - y);
-        if (distance > scrambleRadius) return;
-        const intensity = 1 - distance / scrambleRadius;
-        scrambleChar(charNode, intensity);
+        const distance = Math.hypot(cx - pointerX, cy - pointerY);
+        const local = Math.max(0, 1 - distance / scrambleRadius);
+        const intensity = local * alive;
+
+        if (intensity > 0.02) {
+          hasActivity = true;
+          if (Math.random() < 0.25 + intensity * 0.75) {
+            const idx = Math.floor(Math.random() * scrambleAlphabet.length);
+            charNode.textContent = scrambleAlphabet[idx];
+          } else {
+            charNode.textContent = original;
+          }
+        } else if (charNode.textContent !== original) {
+          charNode.textContent = original;
+        }
       });
+
+      if (hasActivity) {
+        rafId = requestAnimationFrame(render);
+      } else {
+        rafId = 0;
+      }
     }
 
     target.addEventListener('pointermove', function (event) {
-      trigger(event.clientX, event.clientY);
+      pointerX = event.clientX;
+      pointerY = event.clientY;
+      lastPointerAt = performance.now();
+      if (!rafId) rafId = requestAnimationFrame(render);
+    });
+
+    target.addEventListener('pointerleave', function () {
+      lastPointerAt = performance.now() - scrambleFalloffMs;
+      pointerX = -9999;
+      pointerY = -9999;
+      chars.forEach(function (charNode) {
+        const original = charNode.dataset.original || '';
+        if (charNode.textContent !== original) {
+          charNode.textContent = original;
+        }
+      });
     });
   });
 })();
