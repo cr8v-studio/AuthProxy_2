@@ -66,7 +66,7 @@
 
     window.gsap.registerPlugin(splitTextPlugin);
     const split = splitTextPlugin.create
-      ? splitTextPlugin.create(heroTitleSelector, { type: 'chars, words, lines', mask: 'lines' })
+      ? splitTextPlugin.create(heroTitleSelector, { type: 'chars, words, lines' })
       : new splitTextPlugin(heroTitleSelector, { type: 'chars, words, lines' });
 
     if (!split || !split.chars || !split.chars.length) return;
@@ -81,6 +81,9 @@
       stagger: {
         amount: 0.5,
         from: 'random'
+      },
+      onComplete: function () {
+        if (split.revert) split.revert();
       }
     });
   }
