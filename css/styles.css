@@ -258,13 +258,6 @@ a {
   color: #c4ccda;
 }
 
-.scramble-char {
-  display: inline-block;
-  min-width: 0.52ch;
-  text-align: center;
-  transition: transform 0.12s ease;
-}
-
 .btn-row {
   display: flex;
   flex-wrap: wrap;
