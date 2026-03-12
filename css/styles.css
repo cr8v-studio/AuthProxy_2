@@ -180,25 +180,10 @@ a {
   align-items: center;
 }
 
-.brand-logo {
+.brand-logo-image {
   width: 114px;
   height: 48px;
-  background-color: #f4f4f4;
-  -webkit-mask: url("../assets/logo-dark.svg") center / contain no-repeat;
-  mask: url("../assets/logo-dark.svg") center / contain no-repeat;
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  border: 0;
-  padding: 0;
-  white-space: nowrap;
-  clip-path: inset(100%);
-  clip: rect(0 0 0 0);
-  overflow: hidden;
+  display: block;
 }
 
 .site-nav {
