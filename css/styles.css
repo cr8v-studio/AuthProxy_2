@@ -143,6 +143,38 @@ a {
     linear-gradient(180deg, #121621, #0f1115);
 }
 
+.section-how {
+  overflow: hidden;
+  background:
+    radial-gradient(820px 460px at 88% 8%, rgba(132, 171, 218, 0.24), transparent 64%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(42, 77, 142, 0.18) 0%,
+      rgba(42, 77, 142, 0.18) 10%,
+      rgba(8, 16, 34, 0) 10%,
+      rgba(8, 16, 34, 0) 20%
+    ),
+    linear-gradient(180deg, #101723 0%, #0a111b 100%);
+}
+
+.section-how::after {
+  content: "";
+  position: absolute;
+  width: 720px;
+  height: 720px;
+  right: -240px;
+  top: -360px;
+  background: radial-gradient(circle, rgba(153, 188, 228, 0.32), rgba(72, 112, 168, 0.1) 42%, transparent 72%);
+  filter: blur(8px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-how .container {
+  position: relative;
+  z-index: 1;
+}
+
 .section-problem,
 .section-auth,
 .section-admin,
@@ -432,6 +464,58 @@ strong {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   font-size: 0.88rem;
   line-height: 1.52;
+}
+
+.section-how .diagram {
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(114, 148, 205, 0.34);
+  background:
+    linear-gradient(90deg, rgba(5, 10, 22, 0.88) 0%, rgba(8, 14, 26, 0.68) 54%, rgba(5, 10, 22, 0.9) 100%),
+    radial-gradient(260px 120px at 0% 100%, rgba(76, 117, 177, 0.14), transparent 72%);
+  box-shadow:
+    inset 0 0 0 1px rgba(138, 173, 224, 0.09),
+    0 0 0 1px rgba(93, 122, 182, 0.28),
+    0 22px 60px -34px rgba(94, 141, 219, 0.82);
+}
+
+.section-how .diagram::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    radial-gradient(460px 180px at 88% 0%, rgba(152, 187, 232, 0.18), transparent 62%),
+    linear-gradient(180deg, rgba(137, 171, 221, 0.14), transparent 28%);
+}
+
+.section-how .diagram::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -45%;
+  width: 45%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(105, 179, 255, 0.34), transparent);
+  filter: blur(8px);
+  animation: diagram-scan 7s ease-in-out infinite;
+}
+
+@keyframes diagram-scan {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.7;
+  }
+  52% {
+    transform: translateX(320%);
+    opacity: 0.08;
+  }
 }
 
 .table-wrap {
