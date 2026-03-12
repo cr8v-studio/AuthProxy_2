@@ -59,19 +59,23 @@
     }
 
     window.gsap.registerPlugin(window.SplitText);
-    const split = new window.SplitText(heroTitle, { type: 'chars,words' });
-    const chars = split.chars || [];
-    if (!chars.length) return;
+    const split = window.SplitText.create
+      ? window.SplitText.create(heroTitle, { type: 'chars, words, lines', mask: 'lines' })
+      : new window.SplitText(heroTitle, { type: 'chars, words, lines' });
+    if (!split || !split.chars || !split.chars.length) return;
 
     window.setTimeout(function () {
-      window.gsap.from(chars, {
-        duration: 0.8,
-        opacity: 0,
-        x: 120,
-        ease: 'power1.inOut',
-        stagger: 0.04,
-        repeat: 1,
-        yoyo: true
+      window.gsap.from(split.chars, {
+        yPercent: 'random([-100, 100])',
+        rotation: 'random(-30, 30)',
+        ease: 'back.out',
+        autoAlpha: 0,
+        repeat: 4,
+        yoyo: true,
+        stagger: {
+          amount: 0.5,
+          from: 'random'
+        }
       });
     }, 420);
   }
