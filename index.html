@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AuthProxy — Authentication, Routing & Files in One Module</title>
+    <meta
+      name="description"
+      content="AuthProxy is a production-grade edge module for authentication, reverse proxy, file service, notifications, and admin control for PWA apps."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="#top">AuthProxy</a>
+        <button class="mobile-nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <nav id="site-nav" class="site-nav" aria-label="Main">
+          <a href="#problem">Problem</a>
+          <a href="#how">How it works</a>
+          <a href="#auth">Auth methods</a>
+          <a href="#security">Security</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero section section-hero">
+        <div class="container hero-grid">
+          <div>
+            <p class="eyebrow">AuthProxy for Infrastructure Teams</p>
+            <h1>Authentication, Routing &amp; Files — One Module, Zero Dependencies</h1>
+            <p class="lead">
+              AuthProxy is a production-grade web server that handles authentication,
+              reverse proxy, file management, and real-time notifications for PWA applications.
+              11 auth methods, in-memory sessions, rate limiting — all embedded in a single process.
+            </p>
+            <div class="btn-row">
+              <a class="btn btn-primary" href="#quickstart">Start Building -></a>
+              <a class="btn btn-secondary" href="#admin">View Admin Demo -></a>
+            </div>
+          </div>
+          <aside class="stats-bar" aria-label="Key product stats">
+            <div><strong>11</strong><span>Auth Methods</span></div>
+            <div><strong>13</strong><span>Admin Pages</span></div>
+            <div><strong>221</strong><span>Unit Tests</span></div>
+            <div><strong>3 KB</strong><span>First Load</span></div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="problem" class="section section-problem">
+        <div class="container">
+          <h2>You're Assembling Auth Infrastructure From 5 Different Services</h2>
+          <p>Building a modern web application? You need:</p>
+          <ul class="list">
+            <li>An identity provider (Auth0, Keycloak, Firebase)</li>
+            <li>A reverse proxy (nginx, Traefik)</li>
+            <li>A file storage service (S3, MinIO)</li>
+            <li>A notification system (Firebase, OneSignal)</li>
+            <li>An admin panel (custom build or Retool)</li>
+          </ul>
+          <p>
+            That's 5 vendors, 5 failure points, 5 learning curves, and weeks of integration work.
+            <strong>AuthProxy replaces all five.</strong> Single ASP.NET process. No external dependencies.
+            Production-ready from day one.
+          </p>
+        </div>
+      </section>
+
+      <section id="how" class="section section-dark section-how">
+        <div class="container">
+          <h2>One Process. Five Capabilities.</h2>
+            <pre class="diagram" aria-label="Architecture diagram">Internet → AuthProxy (port 443)
+              ├── Authentication (11 methods)
+              ├── Reverse Proxy (dynamic routing)
+              ├── File Service (upload/download/images)
+              ├── Notifications (SSE, Webhooks, Push)
+              └── Admin Panel (13 pages)
+                     ↓
+              Backend Services (your Core, TrexWallet, Chat, CRM)</pre>
+          <p>
+            AuthProxy sits at the edge of your application. Every request passes through it.
+            Authentication is verified, headers are injected (X-Crm, X-Scopes, X-Project), and requests are
+            forwarded to your backend services. Your services never see unauthenticated traffic.
+          </p>
+        </div>
+      </section>
+
+      <section id="auth" class="section section-auth">
+        <div class="container">
+          <h2>Every Auth Method Your Users Need. Already Built.</h2>
+          <div class="card-grid cols-2">
+            <article class="card">
+              <h3>Cryptographic (Strongest)</h3>
+              <ul class="list-tight">
+                <li><strong>PassKey:</strong> Ed25519 challenge-response, SHA256(phone+password+domain)</li>
+                <li><strong>FIDO2/WebAuthn:</strong> Hardware keys with sign-count anti-cloning</li>
+                <li><strong>UserKey:</strong> Imported Ed25519 hex private key</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>One-Time Passwords</h3>
+              <ul class="list-tight">
+                <li><strong>Phone OTP:</strong> SMS/Messenger delivery, optional account creation</li>
+                <li><strong>Email OTP:</strong> Email with MX validation + Magic Link option</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Social / OAuth</h3>
+              <ul class="list-tight">
+                <li>Google, Telegram, Discord, Facebook, GitHub, VK, Apple</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>AI / Machine</h3>
+              <ul class="list-tight">
+                <li><strong>MCP Basic:</strong> Public key headers, read-only</li>
+                <li><strong>MCP Verified:</strong> Ed25519 timestamp signing</li>
+                <li><strong>MCP App:</strong> Delegated third-party access</li>
+              </ul>
+            </article>
+          </div>
+          <div class="technical-notes">
+            <h3>Key Technical Details</h3>
+            <ul class="list-tight">
+              <li><strong>Challenge-Response Protocol:</strong> No passwords stored, 2-minute replay-safe TTL</li>
+              <li><strong>In-Memory Sessions:</strong> ConcurrentDictionary O(1), instant revocation</li>
+              <li><strong>Domain Salting:</strong> stolen credentials don't work across domains</li>
+              <li><strong>Timing Protection:</strong> random 50-150ms delay on all auth attempts</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-proxy">
+        <div class="container">
+          <h2>Dynamic Routing. Zero-Downtime Config Changes.</h2>
+          <p>Routes are stored in the <code>route_map</code> database table and reloaded every 100 seconds.</p>
+          <ul class="list-tight">
+            <li>Three route types: SPA/PWA, API proxy, internal AuthProxy APIs</li>
+            <li>Priority-based matching and conflict handling</li>
+            <li>Security flags: ScopeCheck, WhiteListIPCheck, GeoIP, NoRateLimit, AppAuthAndCORS</li>
+            <li>Injected headers: X-Crm, X-Scopes, X-Project, X-KeyType, X-Country</li>
+            <li>Per-session rate limiting: 20 request buffer, 1/sec replenish</li>
+            <li><code>/private/*</code> APIs restricted to internal networks</li>
+          </ul>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th>nginx + Auth0</th>
+                  <th>AuthProxy</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Config changes</td><td>Reload required</td><td>Live (100s auto-reload)</td></tr>
+                <tr><td>Auth + Proxy</td><td>Two processes</td><td>Single process</td></tr>
+                <tr><td>Per-session rate limit</td><td>Custom implementation</td><td>Built-in</td></tr>
+                <tr><td>Header injection</td><td>Custom Lua/config</td><td>Automatic</td></tr>
+                <tr><td>Admin UI for routes</td><td>None</td><td>Built-in (RouteMap page)</td></tr>
+                <tr><td>GeoIP enrichment</td><td>Extra module</td><td>Built-in flag</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-dark section-files-events">
+        <div class="container card-grid cols-2">
+          <article class="card">
+            <h2>Secure File Upload, Download &amp; Image Processing</h2>
+            <ul class="list-tight">
+              <li>Upload files with ownership tracking (tied to user CRM ID)</li>
+              <li>Automatic image processing and optimization</li>
+              <li>CRC32 checksums for data integrity</li>
+              <li>In-memory caching of PWA static assets (all wwwroot/ loaded at startup)</li>
+              <li>Admin file management: search by owner, filename, size; preview thumbnails; cleanup orphans</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h2>SSE, Webhooks &amp; Push — All From One Event System</h2>
+            <pre class="diagram">Module Events → AuthProxy EventHub (in-memory)
+  ├── SSE → Browser clients
+  ├── Webhooks → External apps
+  └── Push → Mobile devices</pre>
+            <ul class="list-tight">
+              <li>SSE (Server-Sent Events): real-time browser push with reconnection support and event cache</li>
+              <li>Webhooks: HTTP callbacks to external apps with delivery status tracking and health monitoring</li>
+              <li>Push Notifications: mobile push via system integrations</li>
+              <li>Cross-module events: TrexWallet, Chat, CRM publish events and AuthProxy distributes</li>
+              <li>Event Monitor admin page: real-time visibility into SSE connections and webhook delivery status</li>
+              <li>Email, SMS, Telegram: configurable notification channels</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="admin" class="section section-admin">
+        <div class="container">
+          <h2>Full Operational Visibility. Not a Black Box.</h2>
+          <p>Admin Panel includes 13 pages with built-in operations control:</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Page</th><th>What You Can Do</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Dashboard</td><td>Active users, sessions, logins by method, system health (uptime, memory, CPU)</td></tr>
+                <tr><td>Users</td><td>Create, edit, block/unblock, assign scopes, view login history</td></tr>
+                <tr><td>LoginLog</td><td>Filter by date/method/IP/location, export to Excel, suspicious activity highlighting</td></tr>
+                <tr><td>UserKeys</td><td>Revoke/restore Ed25519/FIDO2 keys, last-used tracking, sign count</td></tr>
+                <tr><td>UserApps</td><td>OAuth app registration and management</td></tr>
+                <tr><td>AppAccess</td><td>OAuth grants tracking</td></tr>
+                <tr><td>RouteMap</td><td>CRUD for proxy rules, flag checkboxes, route tester</td></tr>
+                <tr><td>Settings</td><td>18 setting types with per-node configuration</td></tr>
+                <tr><td>SignLog</td><td>Ed25519 signature verification audit trail</td></tr>
+                <tr><td>Sessions</td><td>View all active sessions, kill suspicious ones</td></tr>
+                <tr><td>Events</td><td>SSE/Webhook monitoring, delivery health</td></tr>
+                <tr><td>MCP</td><td>AI agent session tracking and management</td></tr>
+                <tr><td>Federation</td><td>Partner node management</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="muted">Bootstrap 5.3.8 + DataTables 2.3.7 + PostCore. All resources local, no CDN dependencies.</p>
+        </div>
+      </section>
+
+      <section id="security" class="section section-security">
+        <div class="container">
+          <h2>Enterprise Security Without Enterprise Complexity</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Layer</th><th>Protection</th><th>How</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Transport</td><td>MITM prevention</td><td>HTTPS + Let's Encrypt auto-renewal</td></tr>
+                <tr><td>Authentication</td><td>Credential theft</td><td>Ed25519 challenge-response</td></tr>
+                <tr><td>Sessions</td><td>Session hijacking</td><td>HttpOnly + SameSite=Strict + in-memory sessions</td></tr>
+                <tr><td>Authorization</td><td>Unauthorized access</td><td>Scope-based permissions, per-route enforcement</td></tr>
+                <tr><td>API</td><td>API abuse</td><td>Per-session rate limiting</td></tr>
+                <tr><td>Internal</td><td>Module isolation</td><td>X-API-Key + IP whitelist for private APIs</td></tr>
+                <tr><td>Audit</td><td>Compliance</td><td>100% login logging with GeoIP</td></tr>
+                <tr><td>DDoS</td><td>Volume attacks</td><td>Client rate limiting + IP blacklisting</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="muted">GDPR support, FIDO2/WebAuthn standards support, configurable CSP.</p>
+        </div>
+      </section>
+
+      <section class="section section-dark section-performance">
+        <div class="container">
+          <h2>3 KB First Load. Works on 3G.</h2>
+          <ol class="list-tight">
+            <li>Stage 1 (3 KB): CSS animation and branded loading screen</li>
+            <li>Stage 2 (180 KB): AuthProxy gateway PWA from in-memory cache</li>
+            <li>Stage 3: Full application after authentication</li>
+          </ol>
+          <ul class="list-tight">
+            <li>In-memory file serving from <code>wwwroot/</code></li>
+            <li>Preload headers, offline Service Worker, gzip/brotli compression</li>
+            <li>Cache busting with proper headers</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section section-ai">
+        <div class="container card-grid cols-2">
+          <article class="card">
+            <h2>Your Application is AI-Ready From Day One</h2>
+            <p>
+              Built-in MCP server at <code>/auth/v1/mcp</code>. AI agents can authenticate,
+              query data, and execute operations through 8 AuthProxy tools plus tools from connected modules
+              (51 total across the platform).
+            </p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Level</th><th>Access</th><th>Use Case</th></tr></thead>
+                <tbody>
+                  <tr><td>McpBasic</td><td>Read-only, public key headers</td><td>Monitoring/reporting</td></tr>
+                  <tr><td>McpVerified</td><td>Full access, Ed25519 signing</td><td>Automation and trading bots</td></tr>
+                  <tr><td>McpApp</td><td>Delegated third-party access</td><td>Third-party AI integrations</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <h3>AuthProxy MCP Tools</h3>
+            <p class="tool-list">
+              auth_register, auth_login, auth_logout, user_get, user_list, user_update,
+              file_upload, file_download, file_list, session_info, user_key_create, user_key_delete
+            </p>
+          </article>
+          <article class="card">
+            <h2>Multi-Node Deployment &amp; Partner Networks</h2>
+            <ul class="list-tight">
+              <li>Partner trust system with public key exchange</li>
+              <li><code>/hello</code> handshake protocol for verification</li>
+              <li>Up to 10 parallel instances (node IDs 10-19)</li>
+              <li>Per-node configuration via settings table</li>
+              <li>Federation admin page for partner management</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section-tech">
+        <div class="container card-grid cols-2">
+          <article class="card">
+            <h2>Technical Specifications</h2>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Component</th><th>Technology</th></tr></thead>
+                <tbody>
+                  <tr><td>Runtime</td><td>ASP.NET Core 8+ (C#)</td></tr>
+                  <tr><td>Database</td><td>MS SQL Server (Express - free)</td></tr>
+                  <tr><td>Login PWA</td><td>Preact 10.25 (3 KB)</td></tr>
+                  <tr><td>Admin UI</td><td>Bootstrap 5.3.8, DataTables 2.3.7, jQuery 3.7.1</td></tr>
+                  <tr><td>Real-Time</td><td>SSE + in-process EventHub</td></tr>
+                  <tr><td>Crypto</td><td>Ed25519, SHA256, HMAC-SHA256</td></tr>
+                  <tr><td>Deployment</td><td>Docker container</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <h3>Database Tables</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Table</th><th>Purpose</th></tr></thead>
+                <tbody>
+                  <tr><td><code>apguser</code></td><td>User accounts with scopes, flags, profile data</td></tr>
+                  <tr><td><code>user_key</code></td><td>Ed25519/FIDO2 keys per user</td></tr>
+                  <tr><td><code>login_log</code></td><td>Authentication audit trail with GeoIP</td></tr>
+                  <tr><td><code>sign_log</code></td><td>Signature verification records</td></tr>
+                  <tr><td><code>route_map</code></td><td>Dynamic proxy routing rules</td></tr>
+                  <tr><td><code>settings</code></td><td>Runtime configuration (18 types)</td></tr>
+                  <tr><td><code>files</code></td><td>File metadata with CRC32 checksums</td></tr>
+                  <tr><td><code>user_app</code></td><td>OAuth application registrations</td></tr>
+                  <tr><td><code>app_access</code></td><td>OAuth grant records</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <h3>Configuration Levels</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Level</th><th>Source</th><th>Restart Required?</th></tr></thead>
+                <tbody>
+                  <tr><td>Static</td><td><code>appsettings.json</code></td><td>Yes</td></tr>
+                  <tr><td>Dynamic</td><td><code>settings</code> DB table</td><td>No (auto-reload 100s)</td></tr>
+                  <tr><td>Frontend</td><td><code>authproxy-settings.js</code></td><td>Build-time only</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+          <article class="card">
+            <h2>Works With Any Backend</h2>
+            <p>
+              AuthProxy doesn't care what language your backend is written in. It proxies HTTP requests and injects auth headers.
+              Your service receives verified user identity in every request.
+            </p>
+            <ul class="list-tight">
+              <li>Platform modules: TrexWallet, Chat, CRM</li>
+              <li>Custom Core: .NET, Node.js, Python, Go, Java</li>
+              <li>OAuth providers: Google, Discord, Facebook, GitHub, Telegram, VK, Apple</li>
+              <li>Email/SMS: configurable SMTP + SMS providers</li>
+              <li>AI agents: MCP protocol (Claude, GPT, custom)</li>
+              <li>External apps: Webhooks + AppLogin (OAuth-like flow)</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section-dark section-customization">
+        <div class="container">
+          <h2>Three Levels of Login Form Customization</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Level</th><th>Effort</th><th>What You Change</th></tr></thead>
+              <tbody>
+                <tr><td>Config</td><td>5 minutes</td><td>Set DEFAULT_LOGIN_FORM_ID in settings</td></tr>
+                <tr><td>CSS Theme</td><td>1 hour</td><td>Override --color-active, --border-radius, --shadow-md</td></tr>
+                <tr><td>Custom HTML</td><td>1 day</td><td>Create your own login.html</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Pre-built forms: PassKey, FIDO2, Phone OTP, Email OTP, UserKey, All Methods selector, Telegram, Google, Discord, Facebook.</p>
+        </div>
+      </section>
+
+      <section id="pricing" class="section section-pricing">
+        <div class="container">
+          <h2>Pricing / Availability</h2>
+          <p>AuthProxy is the required foundation module of the ItBuild platform and included in every project tier.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Tier</th><th>Cost</th><th>Includes</th></tr></thead>
+              <tbody>
+                <tr><td>Free</td><td>$0</td><td>Full module, all auth methods, community support</td></tr>
+                <tr><td>Business</td><td>From $500/mo</td><td>Priority support, included hosting</td></tr>
+                <tr><td>Enterprise</td><td>Custom</td><td>Dedicated engineer, SLA, custom features</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>What's Free Forever</h3>
+          <ul class="list-tight">
+            <li>All 11 authentication methods</li>
+            <li>Reverse proxy with dynamic routing</li>
+            <li>File service</li>
+            <li>SSE + Webhooks</li>
+            <li>Admin panel (13 pages)</li>
+            <li>MCP integration</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="quickstart" class="section section-quickstart">
+        <div class="container">
+          <h2>Running in 15 Minutes</h2>
+          <ol class="list-tight">
+            <li>Pull Docker image → <code>docker pull itbuild/authproxy</code></li>
+            <li>Configure database → point to SQL Server (Express is free)</li>
+            <li>Set domain → configure rpId for cookie binding</li>
+            <li>Enable auth methods → toggle in settings table</li>
+            <li>Add routes → map your backend services in <code>route_map</code></li>
+            <li>Deploy → your PWA is live with full auth</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="faq" class="section section-faq">
+        <div class="container">
+          <h2>FAQ</h2>
+          <div class="faq-list" role="list">
+            <article class="faq-item" role="listitem">
+              <button class="faq-question" aria-expanded="false">Do I need Redis for sessions?</button>
+              <div class="faq-answer">
+                <p>No. Sessions are in-memory (ConcurrentDictionary). Faster than Redis, zero infrastructure. Lost on restart, which is acceptable for PWA because users re-login.</p>
+              </div>
+            </article>
+            <article class="faq-item" role="listitem">
+              <button class="faq-question" aria-expanded="false">Can I use my own identity provider instead?</button>
+              <div class="faq-answer">
+                <p>AuthProxy is your identity provider. No external IdP is required, but you can still use social OAuth alongside native auth.</p>
+              </div>
+            </article>
+            <article class="faq-item" role="listitem">
+              <button class="faq-question" aria-expanded="false">What happens if AuthProxy goes down?</button>
+              <div class="faq-answer">
+                <p>All requests stop because it is the gateway. For HA, run up to 10 instances with sticky sessions.</p>
+              </div>
+            </article>
+            <article class="faq-item" role="listitem">
+              <button class="faq-question" aria-expanded="false">Is it really more secure than JWT?</button>
+              <div class="faq-answer">
+                <p>Challenge-response means there is no token to steal. Sessions revoke instantly in memory, with no stale JWT window. Domain-salted passwords prevent cross-site reuse.</p>
+              </div>
+            </article>
+            <article class="faq-item" role="listitem">
+              <button class="faq-question" aria-expanded="false">Can I use AuthProxy without other ItBuild modules?</button>
+              <div class="faq-answer">
+                <p>Yes. AuthProxy + your custom backend is the minimal setup.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-dark section-proof">
+        <div class="container">
+          <h2>Production Deployments</h2>
+          <ul class="list-tight">
+            <li><strong>Gekkard</strong> (gekkard.com) — EU-regulated fintech, Malta FSA license (EMI C55146)</li>
+            <li><strong>GekWallet</strong> (web.gekwallet.com) — Live crypto wallet</li>
+            <li><strong>TeleStore</strong> (tele.store) — Game app marketplace</li>
+          </ul>
+          <p class="muted-light">221 unit tests. 13 pre-built admin pages. 12+ years fintech experience.</p>
+        </div>
+      </section>
+
+      <section class="section final-cta section-closing">
+        <div class="container">
+          <h2>Stop Building Auth Infrastructure. Start Building Your Product.</h2>
+          <p>
+            AuthProxy handles authentication, routing, files, and notifications so you can
+            focus on what makes your application unique. Production-ready, battle-tested, zero external dependencies.
+          </p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="#pricing">Start Free -></a>
+            <a class="btn btn-secondary" href="#quickstart">Read Documentation -></a>
+            <a class="btn btn-secondary" href="#admin">View Live Demo -></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer section">
+      <div class="container footer-grid">
+        <p class="brand">AuthProxy</p>
+        <p>AuthProxy — authentication, routing, files, notifications.</p>
+        <p>Built for PWA and infrastructure teams.</p>
+      </div>
+    </footer>
+
+    <script src="./js/main.js"></script>
+  </body>
+</html>
