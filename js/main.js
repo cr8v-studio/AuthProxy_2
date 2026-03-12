@@ -51,12 +51,10 @@
     window.gsap.registerPlugin(window.SplitText);
     const split = new window.SplitText(heroTitle, { type: 'chars,words' });
     const chars = split.chars || [];
-    let activeTween = null;
 
     function playHeroTitleFx() {
       if (!chars.length) return;
-      if (activeTween) activeTween.kill();
-      activeTween = window.gsap.from(chars, {
+      window.gsap.from(chars, {
         duration: 0.8,
         opacity: 0,
         x: 120,
@@ -67,7 +65,6 @@
       });
     }
 
-    playHeroTitleFx();
-    heroTitle.addEventListener('pointerenter', playHeroTitleFx);
+    window.setTimeout(playHeroTitleFx, 420);
   }
 })();
