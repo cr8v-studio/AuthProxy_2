@@ -46,11 +46,17 @@
     });
   });
 
-  const heroTitle = document.querySelector('.hero-title-fx');
+  const heroTitleSelector = '.hero-title-fx';
   function initHeroTitleFx(attempt) {
+    const heroTitle = document.querySelector(heroTitleSelector);
     if (!heroTitle) return;
-    if (!(window.gsap && window.SplitText)) {
-      if (attempt < 30) {
+
+    const splitTextPlugin =
+      window.SplitText ||
+      (window.gsap && window.gsap.plugins && window.gsap.plugins.SplitText);
+
+    if (!(window.gsap && splitTextPlugin)) {
+      if (attempt < 40) {
         window.setTimeout(function () {
           initHeroTitleFx(attempt + 1);
         }, 100);
@@ -58,27 +64,30 @@
       return;
     }
 
-    window.gsap.registerPlugin(window.SplitText);
-    const split = window.SplitText.create
-      ? window.SplitText.create(heroTitle, { type: 'chars, words, lines', mask: 'lines' })
-      : new window.SplitText(heroTitle, { type: 'chars, words, lines' });
+    window.gsap.registerPlugin(splitTextPlugin);
+    const split = splitTextPlugin.create
+      ? splitTextPlugin.create(heroTitleSelector, { type: 'chars, words, lines', mask: 'lines' })
+      : new splitTextPlugin(heroTitleSelector, { type: 'chars, words, lines' });
+
     if (!split || !split.chars || !split.chars.length) return;
 
-    window.setTimeout(function () {
-      window.gsap.from(split.chars, {
-        yPercent: 'random([-100, 100])',
-        rotation: 'random(-30, 30)',
-        ease: 'back.out',
-        autoAlpha: 0,
-        repeat: 4,
-        yoyo: true,
-        stagger: {
-          amount: 0.5,
-          from: 'random'
-        }
-      });
-    }, 420);
+    window.gsap.from(split.chars, {
+      yPercent: 'random([-100,100])',
+      rotation: 'random(-30,30)',
+      ease: 'back.out',
+      autoAlpha: 0,
+      repeat: 4,
+      yoyo: true,
+      stagger: {
+        amount: 0.5,
+        from: 'random'
+      }
+    });
   }
 
-  initHeroTitleFx(0);
+  window.addEventListener('load', function () {
+    window.setTimeout(function () {
+      initHeroTitleFx(0);
+    }, 420);
+  });
 })();
