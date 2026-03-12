@@ -517,6 +517,42 @@
       </div>
     </footer>
 
+    <div
+      id="cookie-banner"
+      class="cookie-banner is-hidden"
+      role="dialog"
+      aria-modal="false"
+      aria-labelledby="cookie-banner-title"
+      aria-describedby="cookie-banner-text"
+      aria-live="polite"
+    >
+      <div class="cookie-banner__icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" width="48" height="48" focusable="false">
+          <circle cx="24" cy="24" r="20" fill="#8fa6b3"></circle>
+          <circle cx="14" cy="16" r="2.8" fill="#2f3237"></circle>
+          <circle cx="23" cy="12" r="3.2" fill="#2f3237"></circle>
+          <circle cx="31" cy="19" r="2.6" fill="#2f3237"></circle>
+          <circle cx="19" cy="27" r="3.4" fill="#2f3237"></circle>
+          <circle cx="29" cy="30" r="2.8" fill="#2f3237"></circle>
+          <circle cx="12" cy="30" r="2.4" fill="#2f3237"></circle>
+        </svg>
+      </div>
+      <div class="cookie-banner__content">
+        <h2 id="cookie-banner-title" class="cookie-banner__title">Cookie policy applies</h2>
+        <p id="cookie-banner-text" class="cookie-banner__text">
+          Our website uses cookies. The policy objective is to explain how we uses cookies and processes personal data.
+        </p>
+        <div class="cookie-banner__actions">
+          <button type="button" class="cookie-btn cookie-btn--cancel" data-cookie-action="cancel" aria-label="Cancel cookie consent">
+            CANCEL
+          </button>
+          <button type="button" class="cookie-btn cookie-btn--accept" data-cookie-action="accept" aria-label="Accept cookie consent">
+            ACCEPT
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
     <script src="./js/main.js" defer></script>
