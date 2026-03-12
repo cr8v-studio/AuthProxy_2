@@ -47,13 +47,23 @@
   });
 
   const heroTitle = document.querySelector('.hero-title-fx');
-  if (heroTitle && window.gsap && window.SplitText) {
+  function initHeroTitleFx(attempt) {
+    if (!heroTitle) return;
+    if (!(window.gsap && window.SplitText)) {
+      if (attempt < 30) {
+        window.setTimeout(function () {
+          initHeroTitleFx(attempt + 1);
+        }, 100);
+      }
+      return;
+    }
+
     window.gsap.registerPlugin(window.SplitText);
     const split = new window.SplitText(heroTitle, { type: 'chars,words' });
     const chars = split.chars || [];
+    if (!chars.length) return;
 
-    function playHeroTitleFx() {
-      if (!chars.length) return;
+    window.setTimeout(function () {
       window.gsap.from(chars, {
         duration: 0.8,
         opacity: 0,
@@ -63,8 +73,8 @@
         repeat: 1,
         yoyo: true
       });
-    }
-
-    window.setTimeout(playHeroTitleFx, 420);
+    }, 420);
   }
+
+  initHeroTitleFx(0);
 })();
