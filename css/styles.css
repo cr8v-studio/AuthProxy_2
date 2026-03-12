@@ -146,15 +146,17 @@ a {
 .section-how {
   overflow: hidden;
   background:
-    radial-gradient(820px 460px at 88% 8%, rgba(132, 171, 218, 0.24), transparent 64%),
-    repeating-linear-gradient(
+    linear-gradient(
       90deg,
-      rgba(42, 77, 142, 0.18) 0%,
-      rgba(42, 77, 142, 0.18) 10%,
-      rgba(8, 16, 34, 0) 10%,
-      rgba(8, 16, 34, 0) 20%
+      rgba(77, 128, 214, 0.14) 0%,
+      rgba(77, 128, 214, 0) 22%,
+      rgba(132, 98, 212, 0.09) 42%,
+      rgba(132, 98, 212, 0) 62%,
+      rgba(210, 170, 94, 0.09) 78%,
+      rgba(210, 170, 94, 0) 100%
     ),
-    linear-gradient(180deg, #101723 0%, #0a111b 100%);
+    radial-gradient(950px 400px at 85% 20%, rgba(124, 159, 183, 0.18), transparent 60%),
+    linear-gradient(180deg, #121621, #0f1115);
 }
 
 .section-how::after {
@@ -487,7 +489,10 @@ strong {
   pointer-events: none;
   background:
     radial-gradient(460px 180px at 88% 0%, rgba(152, 187, 232, 0.18), transparent 62%),
-    linear-gradient(180deg, rgba(137, 171, 221, 0.14), transparent 28%);
+    linear-gradient(180deg, rgba(137, 171, 221, 0.14), transparent 28%),
+    linear-gradient(90deg, transparent 18%, rgba(82, 199, 255, 0.42) 24%, transparent 32%),
+    linear-gradient(90deg, transparent 46%, rgba(255, 99, 182, 0.34) 52%, transparent 58%),
+    linear-gradient(90deg, transparent 74%, rgba(255, 201, 101, 0.34) 80%, transparent 86%);
 }
 
 .section-how .diagram::after {
@@ -498,9 +503,17 @@ strong {
   width: 45%;
   height: 100%;
   pointer-events: none;
-  background: linear-gradient(90deg, transparent, rgba(105, 179, 255, 0.34), transparent);
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(104, 196, 255, 0.44) 34%,
+      rgba(255, 97, 177, 0.3) 60%,
+      rgba(255, 205, 115, 0.28) 82%,
+      transparent 100%
+    );
   filter: blur(8px);
-  animation: diagram-scan 7s ease-in-out infinite;
+  animation: diagram-scan 8.2s ease-in-out infinite;
 }
 
 @keyframes diagram-scan {
