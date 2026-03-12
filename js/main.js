@@ -45,4 +45,82 @@
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
+
+  const scrambleTargets = document.querySelectorAll('.scramble-text');
+  const scrambleAlphabet = '.:';
+  const scrambleRadius = 110;
+  const scrambleCooldownMs = 240;
+
+  function splitToChars(node) {
+    const source = node.textContent || '';
+    const fragment = document.createDocumentFragment();
+    for (let i = 0; i < source.length; i += 1) {
+      const ch = source[i];
+      if (ch === ' ') {
+        fragment.appendChild(document.createTextNode(' '));
+        continue;
+      }
+      const span = document.createElement('span');
+      span.className = 'scramble-char';
+      span.textContent = ch;
+      span.dataset.original = ch;
+      span.dataset.lastRun = '0';
+      fragment.appendChild(span);
+    }
+    node.textContent = '';
+    node.appendChild(fragment);
+  }
+
+  function scrambleChar(charNode, intensity) {
+    if (!charNode || charNode.dataset.animating === '1') return;
+
+    const now = Date.now();
+    const last = Number(charNode.dataset.lastRun || '0');
+    if (now - last < scrambleCooldownMs) return;
+
+    charNode.dataset.animating = '1';
+    charNode.dataset.lastRun = String(now);
+    const original = charNode.dataset.original || charNode.textContent || '';
+    const duration = 180 + Math.round(intensity * 420);
+    const start = performance.now();
+
+    function frame(ts) {
+      const progress = Math.min((ts - start) / duration, 1);
+      if (progress >= 1) {
+        charNode.textContent = original;
+        charNode.dataset.animating = '0';
+        return;
+      }
+
+      const pool = Math.max(1, Math.round(intensity * 4));
+      if (Math.random() < 0.7 + intensity * 0.2) {
+        const index = Math.floor(Math.random() * pool) % scrambleAlphabet.length;
+        charNode.textContent = scrambleAlphabet[index];
+      }
+      requestAnimationFrame(frame);
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  scrambleTargets.forEach(function (target) {
+    splitToChars(target);
+    const chars = target.querySelectorAll('.scramble-char');
+
+    function trigger(x, y) {
+      chars.forEach(function (charNode) {
+        const rect = charNode.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const distance = Math.hypot(cx - x, cy - y);
+        if (distance > scrambleRadius) return;
+        const intensity = 1 - distance / scrambleRadius;
+        scrambleChar(charNode, intensity);
+      });
+    }
+
+    target.addEventListener('pointermove', function (event) {
+      trigger(event.clientX, event.clientY);
+    });
+  });
 })();
