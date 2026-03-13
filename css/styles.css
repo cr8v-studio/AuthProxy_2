@@ -192,26 +192,6 @@ a {
   overflow: hidden;
 }
 
-.auth-unicorn-layer {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.85;
-}
-
-/* Hide Unicorn attribution badge placeholder in this section */
-#auth-unicorn-layer a[href*="unicorn.studio"],
-#auth-unicorn-layer [class*="unicorn-badge"],
-#auth-unicorn-layer [id*="unicorn-badge"] {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
 .section-auth .container {
   position: relative;
   z-index: 1;
@@ -562,6 +542,58 @@ strong {
 .section-auth .card li strong,
 .section-auth .technical-notes li strong {
   color: #ffffff;
+}
+
+/* Interactive glowing border (vanilla adaptation of glowing-effect) */
+.section-auth .glow-card {
+  --active: 0;
+  --start: 0;
+  --spread: 40;
+  --glow-border-width: 2px;
+  --glow-gradient:
+    radial-gradient(circle, #dd7bbb 10%, #dd7bbb00 20%),
+    radial-gradient(circle at 40% 40%, #d79f1e 5%, #d79f1e00 15%),
+    radial-gradient(circle at 60% 60%, #5a922c 10%, #5a922c00 20%),
+    radial-gradient(circle at 40% 60%, #4c7894 10%, #4c789400 20%),
+    repeating-conic-gradient(
+      from 236.84deg at 50% 50%,
+      #dd7bbb 0%,
+      #d79f1e 5%,
+      #5a922c 10%,
+      #4c7894 15%,
+      #dd7bbb 20%
+    );
+}
+
+.section-auth .glow-card::after {
+  content: "";
+  position: absolute;
+  inset: calc(-1 * var(--glow-border-width));
+  border-radius: inherit;
+  border: var(--glow-border-width) solid transparent;
+  background: var(--glow-gradient);
+  background-attachment: fixed;
+  opacity: var(--active);
+  pointer-events: none;
+  transition: opacity 260ms ease;
+  -webkit-mask:
+    linear-gradient(#0000, #0000) padding-box,
+    conic-gradient(
+      from calc((var(--start) - var(--spread)) * 1deg),
+      #00000000 0deg,
+      #ffffff,
+      #00000000 calc(var(--spread) * 2deg)
+    ) border-box;
+  -webkit-mask-composite: source-in, xor;
+  mask:
+    linear-gradient(#0000, #0000) padding-box,
+    conic-gradient(
+      from calc((var(--start) - var(--spread)) * 1deg),
+      #00000000 0deg,
+      #ffffff,
+      #00000000 calc(var(--spread) * 2deg)
+    ) border-box;
+  mask-composite: intersect;
 }
 
 .diagram {

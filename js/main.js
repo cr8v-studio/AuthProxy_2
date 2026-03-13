@@ -92,6 +92,72 @@
     }
   }
 
+  function initAuthCardGlow() {
+    const targets = document.querySelectorAll('#auth .card, #auth .technical-notes');
+    if (!targets.length) return;
+
+    const state = { x: -9999, y: -9999 };
+    const proximity = 64;
+    const inactiveZone = 0.01;
+
+    targets.forEach(function (el) {
+      el.classList.add('glow-card');
+      el.style.setProperty('--spread', '40');
+      el.style.setProperty('--active', '0');
+      el.style.setProperty('--start', '0');
+      el.dataset.glowAngle = '0';
+    });
+
+    function updateGlow() {
+      targets.forEach(function (el) {
+        const rect = el.getBoundingClientRect();
+        const centerX = rect.left + rect.width * 0.5;
+        const centerY = rect.top + rect.height * 0.5;
+
+        const distCenter = Math.hypot(state.x - centerX, state.y - centerY);
+        const inactiveRadius = 0.5 * Math.min(rect.width, rect.height) * inactiveZone;
+        if (distCenter < inactiveRadius) {
+          el.style.setProperty('--active', '0');
+          return;
+        }
+
+        const active =
+          state.x > rect.left - proximity &&
+          state.x < rect.right + proximity &&
+          state.y > rect.top - proximity &&
+          state.y < rect.bottom + proximity;
+
+        el.style.setProperty('--active', active ? '1' : '0');
+        if (!active) return;
+
+        const current = parseFloat(el.dataset.glowAngle || '0');
+        const target = (180 * Math.atan2(state.y - centerY, state.x - centerX)) / Math.PI + 90;
+        const diff = ((target - current + 180) % 360) - 180;
+        const next = current + diff * 0.18;
+        el.dataset.glowAngle = String(next);
+        el.style.setProperty('--start', String(next));
+      });
+    }
+
+    document.body.addEventListener(
+      'pointermove',
+      function (e) {
+        state.x = e.clientX;
+        state.y = e.clientY;
+        updateGlow();
+      },
+      { passive: true }
+    );
+
+    window.addEventListener(
+      'scroll',
+      function () {
+        updateGlow();
+      },
+      { passive: true }
+    );
+  }
+
   const langButtons = document.querySelectorAll('.lang-btn');
   const trackedNodes = [];
   const trackedSet = new WeakSet();
@@ -248,6 +314,7 @@
   const savedLang = localStorage.getItem('authproxy_lang') || 'en';
   setLanguage(savedLang);
   initCookieBanner();
+  initAuthCardGlow();
 
   const heroTitleSelector = '.hero-title-fx';
   function initHeroTitleFx(attempt) {
