@@ -102,7 +102,7 @@
 
     targets.forEach(function (el) {
       el.classList.add('glow-card');
-      el.style.setProperty('--active', '0');
+      el.style.setProperty('--active', '0.34');
       el.style.setProperty('--mx', '50%');
       el.style.setProperty('--my', '50%');
     });
@@ -116,7 +116,7 @@
         const distCenter = Math.hypot(state.x - centerX, state.y - centerY);
         const inactiveRadius = 0.5 * Math.min(rect.width, rect.height) * inactiveZone;
         if (distCenter < inactiveRadius) {
-          el.style.setProperty('--active', '0');
+          el.style.setProperty('--active', '0.34');
           return;
         }
 
@@ -126,7 +126,7 @@
           state.y > rect.top - proximity &&
           state.y < rect.bottom + proximity;
 
-        el.style.setProperty('--active', active ? '1' : '0');
+        el.style.setProperty('--active', active ? '0.95' : '0.34');
         if (!active) return;
 
         const px = ((state.x - rect.left) / rect.width) * 100;

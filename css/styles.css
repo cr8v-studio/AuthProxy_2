@@ -546,9 +546,10 @@ strong {
 
 /* Interactive glowing border (vanilla adaptation of glowing-effect) */
 .section-auth .glow-card {
-  --active: 0;
+  --active: 0.34;
   --mx: 50%;
   --my: 50%;
+  isolation: isolate;
 }
 
 .section-auth .glow-card::after {
@@ -557,19 +558,37 @@ strong {
   inset: -1px;
   border-radius: inherit;
   pointer-events: none;
+  z-index: 1;
   opacity: var(--active);
   background:
     radial-gradient(
-      240px 240px at var(--mx) var(--my),
-      rgba(221, 123, 187, 0.48) 0%,
-      rgba(215, 159, 30, 0.42) 26%,
-      rgba(90, 146, 44, 0.32) 44%,
-      rgba(76, 120, 148, 0.24) 60%,
+      300px 300px at var(--mx) var(--my),
+      rgba(120, 180, 255, 0.42) 0%,
+      rgba(88, 136, 232, 0.34) 24%,
+      rgba(72, 101, 196, 0.26) 44%,
+      rgba(64, 88, 168, 0.18) 62%,
       rgba(76, 120, 148, 0) 76%
     );
-  transition: opacity 220ms ease;
-  filter: blur(1px) saturate(120%);
-  mix-blend-mode: screen;
+  transition: opacity 220ms ease, filter 220ms ease;
+  filter: blur(6px) saturate(130%);
+  mix-blend-mode: normal;
+  animation: auth-card-glow-float 6s ease-in-out infinite alternate;
+}
+
+.section-auth .glow-card h3,
+.section-auth .glow-card .list-tight,
+.section-auth .glow-card p {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes auth-card-glow-float {
+  0% {
+    filter: blur(6px) saturate(120%);
+  }
+  100% {
+    filter: blur(8px) saturate(145%);
+  }
 }
 
 .diagram {
