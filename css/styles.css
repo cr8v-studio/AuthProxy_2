@@ -202,6 +202,16 @@ a {
   opacity: 0.85;
 }
 
+/* Hide Unicorn attribution badge placeholder in this section */
+#auth-unicorn-layer a[href*="unicorn.studio"],
+#auth-unicorn-layer [class*="unicorn-badge"],
+#auth-unicorn-layer [id*="unicorn-badge"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 .section-auth .container {
   position: relative;
   z-index: 1;
