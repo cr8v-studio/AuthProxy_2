@@ -92,6 +92,38 @@
     }
   }
 
+  function initUnicornAuthEffect() {
+    const layer = document.getElementById('auth-unicorn-layer');
+    if (!layer) return;
+
+    const sdkUrl =
+      'https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.4/dist/unicornStudio.umd.js';
+
+    function start() {
+      if (window.UnicornStudio && typeof window.UnicornStudio.init === 'function') {
+        window.UnicornStudio.init();
+      }
+    }
+
+    if (window.UnicornStudio && typeof window.UnicornStudio.init === 'function') {
+      start();
+      return;
+    }
+
+    const existingScript = document.querySelector('script[data-unicorn-sdk="true"]');
+    if (existingScript) {
+      existingScript.addEventListener('load', start, { once: true });
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = sdkUrl;
+    script.async = true;
+    script.dataset.unicornSdk = 'true';
+    script.onload = start;
+    (document.head || document.body).appendChild(script);
+  }
+
   const langButtons = document.querySelectorAll('.lang-btn');
   const trackedNodes = [];
   const trackedSet = new WeakSet();
@@ -248,6 +280,7 @@
   const savedLang = localStorage.getItem('authproxy_lang') || 'en';
   setLanguage(savedLang);
   initCookieBanner();
+  initUnicornAuthEffect();
 
   const heroTitleSelector = '.hero-title-fx';
   function initHeroTitleFx(attempt) {
