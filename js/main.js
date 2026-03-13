@@ -102,10 +102,9 @@
 
     targets.forEach(function (el) {
       el.classList.add('glow-card');
-      el.style.setProperty('--spread', '40');
       el.style.setProperty('--active', '0');
-      el.style.setProperty('--start', '0');
-      el.dataset.glowAngle = '0';
+      el.style.setProperty('--mx', '50%');
+      el.style.setProperty('--my', '50%');
     });
 
     function updateGlow() {
@@ -130,12 +129,10 @@
         el.style.setProperty('--active', active ? '1' : '0');
         if (!active) return;
 
-        const current = parseFloat(el.dataset.glowAngle || '0');
-        const target = (180 * Math.atan2(state.y - centerY, state.x - centerX)) / Math.PI + 90;
-        const diff = ((target - current + 180) % 360) - 180;
-        const next = current + diff * 0.18;
-        el.dataset.glowAngle = String(next);
-        el.style.setProperty('--start', String(next));
+        const px = ((state.x - rect.left) / rect.width) * 100;
+        const py = ((state.y - rect.top) / rect.height) * 100;
+        el.style.setProperty('--mx', `${Math.max(0, Math.min(100, px))}%`);
+        el.style.setProperty('--my', `${Math.max(0, Math.min(100, py))}%`);
       });
     }
 
