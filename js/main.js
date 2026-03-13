@@ -92,63 +92,6 @@
     }
   }
 
-  function initUnicornAuthEffect() {
-    const layer = document.getElementById('auth-unicorn-layer');
-    if (!layer) return;
-
-    const sdkUrl =
-      'https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.4/dist/unicornStudio.umd.js';
-
-    function start() {
-      if (window.UnicornStudio && typeof window.UnicornStudio.init === 'function') {
-        window.UnicornStudio.init();
-        hideUnicornBadge();
-      }
-    }
-
-    function hideUnicornBadge() {
-      const hide = function () {
-        const nodes = document.querySelectorAll('a, div, span, button');
-        nodes.forEach(function (node) {
-          const text = (node.textContent || '').trim().toLowerCase();
-          const href = (node.getAttribute && node.getAttribute('href')) || '';
-          if (
-            text.includes('made with unicorn.studio') ||
-            href.includes('unicorn.studio') ||
-            (node.className && String(node.className).toLowerCase().includes('unicorn-badge'))
-          ) {
-            node.style.display = 'none';
-          }
-        });
-      };
-
-      hide();
-      const observer = new MutationObserver(hide);
-      observer.observe(document.body, { childList: true, subtree: true });
-      window.setTimeout(function () {
-        observer.disconnect();
-      }, 15000);
-    }
-
-    if (window.UnicornStudio && typeof window.UnicornStudio.init === 'function') {
-      start();
-      return;
-    }
-
-    const existingScript = document.querySelector('script[data-unicorn-sdk="true"]');
-    if (existingScript) {
-      existingScript.addEventListener('load', start, { once: true });
-      return;
-    }
-
-    const script = document.createElement('script');
-    script.src = sdkUrl;
-    script.async = true;
-    script.dataset.unicornSdk = 'true';
-    script.onload = start;
-    (document.head || document.body).appendChild(script);
-  }
-
   const langButtons = document.querySelectorAll('.lang-btn');
   const trackedNodes = [];
   const trackedSet = new WeakSet();
@@ -305,7 +248,6 @@
   const savedLang = localStorage.getItem('authproxy_lang') || 'en';
   setLanguage(savedLang);
   initCookieBanner();
-  initUnicornAuthEffect();
 
   const heroTitleSelector = '.hero-title-fx';
   function initHeroTitleFx(attempt) {
