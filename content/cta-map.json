@@ -8,7 +8,7 @@
     },
     {
       "label": "View Admin Demo →",
-      "href": "#admin",
+      "href": "#live-demo",
       "priority": "secondary",
       "source": "content-source.md#1-hero-section"
     }
@@ -28,7 +28,7 @@
     },
     {
       "label": "View Live Demo →",
-      "href": "#admin",
+      "href": "#live-demo",
       "priority": "tertiary",
       "source": "content-source.md#20-closing-cta"
     }

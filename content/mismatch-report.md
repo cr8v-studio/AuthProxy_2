@@ -1,48 +1,47 @@
-# AuthProxy Landing Audit Report
+# AuthProxy Landing Audit Report (Full)
 
+Audit date: 2026-03-14
 Source of truth: `content/content-source.md` (copied from `LANDING-AUTHPROXY.md`).
-Target: `index.html`
+Website target: `index.html`.
 
 ## MATCHED SECTIONS
-- HERO SECTION
-- THE PROBLEM
-- HOW IT WORKS
-- ADMIN PANEL — 13 PAGES
-- TECHNICAL SPECIFICATIONS
-- QUICK START
-- FAQ
-- CLOSING CTA
+1. HERO SECTION
+2. THE PROBLEM
+3. HOW IT WORKS
+4. AUTHENTICATION — 11 METHODS
+5. REVERSE PROXY
+6. FILE SERVICE
+7. REAL-TIME NOTIFICATIONS
+8. ADMIN PANEL — 13 PAGES
+9. SECURITY
+10. PWA OPTIMIZATION
+11. MCP INTEGRATION (AI-NATIVE)
+12. FEDERATION
+13. TECHNICAL SPECIFICATIONS
+14. INTEGRATION
+15. FORM CUSTOMIZATION
+16. PRICING / AVAILABILITY
+17. QUICK START
+18. FAQ
+19. SOCIAL PROOF
+20. CLOSING CTA
 
-## MISSING SECTIONS (before sync)
-- FILE SERVICE as standalone section
-- REAL-TIME NOTIFICATIONS as standalone section
-- FEDERATION as standalone section
-- INTEGRATION as standalone section
+## MISSING SECTIONS
+- None.
 
-## OUTDATED SECTIONS (before sync)
-- AUTHENTICATION — condensed lists instead of MD table details
-- REVERSE PROXY — incomplete copy and feature detail levels
-- SECURITY — reduced table wording and compliance details
-- PWA OPTIMIZATION — shortened stage/performance copy
-- SOCIAL PROOF — missing explicit quality metrics list
-- PRICING / AVAILABILITY — copy missing exact emphasis and wording
+## OUTDATED SECTIONS
+- None in primary section content flow.
 
-## TEXT MISMATCHES (before sync)
-- Hero and closing CTA arrows used `->` instead of `→`
-- FAQ answers deviated from MD phrasing
-- Security rows lacked exact wording from MD (sessions/API/audit)
-- Admin tech stack presented as one line instead of defined bullet detail
+## TEXT MISMATCHES
+- None in section headlines, core copy blocks, lists, and tables tied to MD sections.
 
-## CTA MISMATCHES (before sync)
-- Hero and closing CTA labels were not exact symbol match (`->` vs `→`)
+## CTA MISMATCHES
+- Resolved: `View Admin Demo →` and `View Live Demo →` now target `#live-demo`.
+- Hero and closing CTA labels match MD.
 
-## NAVBAR MISMATCHES (before sync)
-- Navbar lacked important MD sections (Proxy, Files, Notifications, Admin Panel, MCP, Docs)
-- Navbar labels were less aligned with MD section names
+## NAVBAR MISMATCHES
+- None.
+- Navbar links map to visible existing section anchors.
 
-## SYNCHRONIZATION RESULT
-All listed mismatches were synchronized in `index.html` and linked through:
-- `content/site-map.md`
-- `content/nav-map.json`
-- `content/cta-map.json`
-- `content/content-rules.md`
+## NOTES
+- Utility UI outside MD section schema remains (language switch and footer chrome), preserved to keep current product UX.
