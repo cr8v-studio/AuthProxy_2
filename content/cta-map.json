@@ -1,4 +1,12 @@
 {
+  "navbar_primary": [
+    {
+      "label": "Start Building →",
+      "href": "#quickstart",
+      "priority": "primary",
+      "source": "LANDING-AUTHPROXY.md#1-hero-section"
+    }
+  ],
   "hero": [
     {
       "label": "Start Building →",

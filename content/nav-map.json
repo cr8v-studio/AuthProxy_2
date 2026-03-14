@@ -1,16 +1,32 @@
-[
-  { "label": "Problem", "href": "#problem", "section": "problem", "active": true },
-  { "label": "How it works", "href": "#how", "section": "how", "active": true },
-  { "label": "Authentication", "href": "#auth", "section": "auth", "active": true },
-  { "label": "Proxy", "href": "#proxy", "section": "proxy", "active": true },
-  { "label": "Files", "href": "#files", "section": "files", "active": true },
-  { "label": "Notifications", "href": "#notifications", "section": "notifications", "active": true },
-  { "label": "Admin Panel", "href": "#admin", "section": "admin", "active": true },
-  { "label": "Security", "href": "#security", "section": "security", "active": true },
-  { "label": "Tech Specs", "href": "#technical-specs", "section": "technical", "active": true },
-  { "label": "Integration", "href": "#integration", "section": "integration", "active": true },
-  { "label": "MCP", "href": "#mcp", "section": "mcp", "active": true },
-  { "label": "Pricing", "href": "#pricing", "section": "pricing", "active": true },
-  { "label": "FAQ", "href": "#faq", "section": "faq", "active": true },
-  { "label": "Quick Start", "href": "#quickstart", "section": "quickstart", "active": true }
-]
+{
+  "items": [
+    { "type": "link", "label": "Problem", "href": "#problem", "section": "problem", "active": true },
+    { "type": "link", "label": "How it Works", "href": "#how", "section": "how", "active": true },
+    { "type": "link", "label": "Auth", "href": "#auth", "section": "auth", "active": true },
+    {
+      "type": "dropdown",
+      "label": "Platform",
+      "active": true,
+      "items": [
+        { "label": "Proxy", "href": "#proxy", "section": "proxy", "active": true },
+        { "label": "Files", "href": "#files", "section": "files", "active": true },
+        { "label": "Notifications", "href": "#notifications", "section": "notifications", "active": true },
+        { "label": "Admin Panel", "href": "#admin", "section": "admin", "active": true }
+      ]
+    },
+    { "type": "link", "label": "Security", "href": "#security", "section": "security", "active": true },
+    {
+      "type": "dropdown",
+      "label": "Developers",
+      "active": true,
+      "items": [
+        { "label": "Tech Specs", "href": "#technical-specs", "section": "technical", "active": true },
+        { "label": "Integration", "href": "#integration", "section": "integration", "active": true },
+        { "label": "MCP", "href": "#mcp", "section": "mcp", "active": true },
+        { "label": "Quick Start", "href": "#quickstart", "section": "quickstart", "active": true }
+      ]
+    },
+    { "type": "link", "label": "Pricing", "href": "#pricing", "section": "pricing", "active": true },
+    { "type": "link", "label": "FAQ", "href": "#faq", "section": "faq", "active": true }
+  ]
+}

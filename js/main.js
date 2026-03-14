@@ -348,6 +348,8 @@
   function bindInteractions() {
     const navToggle = document.querySelector('.mobile-nav-toggle');
     const nav = document.querySelector('#site-nav');
+    const dropdownToggles = document.querySelectorAll('.nav-dropdown-toggle');
+    const isMobile = window.matchMedia('(max-width: 760px)').matches;
 
     if (navToggle && nav) {
       navToggle.addEventListener('click', function () {
@@ -359,9 +361,46 @@
         link.addEventListener('click', function () {
           nav.classList.remove('open');
           navToggle.setAttribute('aria-expanded', 'false');
+          document.querySelectorAll('.nav-dropdown.open').forEach(function (dropdown) {
+            dropdown.classList.remove('open');
+            const toggle = dropdown.querySelector('.nav-dropdown-toggle');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+          });
         });
       });
     }
+
+    dropdownToggles.forEach(function (toggle) {
+      toggle.addEventListener('click', function (e) {
+        if (!isMobile) return;
+        e.preventDefault();
+        const dropdown = toggle.closest('.nav-dropdown');
+        if (!dropdown) return;
+        const willOpen = !dropdown.classList.contains('open');
+        document.querySelectorAll('.nav-dropdown.open').forEach(function (openDropdown) {
+          openDropdown.classList.remove('open');
+          const openToggle = openDropdown.querySelector('.nav-dropdown-toggle');
+          if (openToggle) openToggle.setAttribute('aria-expanded', 'false');
+        });
+        if (willOpen) {
+          dropdown.classList.add('open');
+          toggle.setAttribute('aria-expanded', 'true');
+        } else {
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!isMobile) return;
+      if (!e.target.closest('.nav-dropdown')) {
+        document.querySelectorAll('.nav-dropdown.open').forEach(function (dropdown) {
+          dropdown.classList.remove('open');
+          const toggle = dropdown.querySelector('.nav-dropdown-toggle');
+          if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        });
+      }
+    });
 
     document.querySelectorAll('.faq-question').forEach(function (button) {
       button.addEventListener('click', function () {
@@ -480,19 +519,57 @@
         })
     );
 
-    return navMap.filter(function (item) {
-      return item.active && visibleIds.has(item.href);
-    });
+    return {
+      items: (navMap.items || [])
+        .map(function (item) {
+          if (!item.active) return null;
+          if (item.type === 'dropdown') {
+            const items = (item.items || []).filter(function (child) {
+              return child.active && visibleIds.has(child.href);
+            });
+            if (!items.length) return null;
+            return Object.assign({}, item, { items: items });
+          }
+          return visibleIds.has(item.href) ? item : null;
+        })
+        .filter(Boolean)
+    };
   }
 
   function renderNavbar(navMap) {
     const nav = document.getElementById('site-nav');
     if (!nav) return;
-    nav.innerHTML = navMap
+    nav.innerHTML = (navMap.items || [])
       .map(function (item) {
-        return `<a href="${escapeHtml(item.href)}">${escapeHtml(item.label)}</a>`;
+        if (item.type === 'dropdown') {
+          return `
+            <div class="nav-dropdown">
+              <button type="button" class="nav-dropdown-toggle" aria-expanded="false">
+                ${escapeHtml(item.label)}
+              </button>
+              <div class="nav-dropdown-menu">
+                ${(item.items || [])
+                  .map(function (child) {
+                    return `<a href="${escapeHtml(child.href)}">${escapeHtml(child.label)}</a>`;
+                  })
+                  .join('')}
+              </div>
+            </div>`;
+        }
+        return `<a class="nav-link" href="${escapeHtml(item.href)}">${escapeHtml(item.label)}</a>`;
       })
       .join('');
+  }
+
+  function renderNavCta(ctas) {
+    const navControls = document.querySelector('.nav-controls');
+    if (!navControls) return;
+    const primary = ctas.navbar_primary && ctas.navbar_primary[0];
+    if (!primary) {
+      navControls.innerHTML = '';
+      return;
+    }
+    navControls.innerHTML = buildButton(primary);
   }
 
   function renderFooter(content) {
@@ -546,6 +623,7 @@
       setMeta(content);
       renderMain(content, siteMap, ctas);
       renderNavbar(ensureNavTargets(navMap, siteMap));
+      renderNavCta(ctas);
       renderFooter(content);
 
       bindInteractions();
