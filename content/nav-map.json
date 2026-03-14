@@ -1,14 +1,14 @@
 [
-  { "label": "Problem", "href": "#problem", "section": "THE PROBLEM" },
-  { "label": "How it works", "href": "#how", "section": "HOW IT WORKS" },
-  { "label": "Authentication", "href": "#auth", "section": "AUTHENTICATION — 11 METHODS" },
-  { "label": "Proxy", "href": "#proxy", "section": "REVERSE PROXY" },
-  { "label": "Files", "href": "#files", "section": "FILE SERVICE" },
-  { "label": "Notifications", "href": "#notifications", "section": "REAL-TIME NOTIFICATIONS" },
-  { "label": "Admin Panel", "href": "#admin", "section": "ADMIN PANEL — 13 PAGES" },
-  { "label": "Security", "href": "#security", "section": "SECURITY" },
-  { "label": "MCP", "href": "#mcp", "section": "MCP INTEGRATION (AI-NATIVE)" },
-  { "label": "Pricing", "href": "#pricing", "section": "PRICING / AVAILABILITY" },
-  { "label": "FAQ", "href": "#faq", "section": "FAQ" },
-  { "label": "Docs", "href": "#quickstart", "section": "QUICK START" }
+  { "label": "Problem", "href": "#problem", "section": "problem", "active": true },
+  { "label": "How it works", "href": "#how", "section": "how", "active": true },
+  { "label": "Authentication", "href": "#auth", "section": "auth", "active": true },
+  { "label": "Proxy", "href": "#proxy", "section": "proxy", "active": true },
+  { "label": "Files", "href": "#files", "section": "files", "active": true },
+  { "label": "Notifications", "href": "#notifications", "section": "notifications", "active": true },
+  { "label": "Admin Panel", "href": "#admin", "section": "admin", "active": true },
+  { "label": "Security", "href": "#security", "section": "security", "active": true },
+  { "label": "MCP", "href": "#mcp", "section": "mcp", "active": true },
+  { "label": "Pricing", "href": "#pricing", "section": "pricing", "active": true },
+  { "label": "FAQ", "href": "#faq", "section": "faq", "active": true },
+  { "label": "Docs", "href": "#quickstart", "section": "quickstart", "active": true }
 ]

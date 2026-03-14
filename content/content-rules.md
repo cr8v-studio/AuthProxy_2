@@ -1,44 +1,31 @@
-# AuthProxy Content Synchronization Rules
+# AuthProxy Content Rules (MD-driven)
 
-## Source Of Truth
-- The file `content/content-source.md` is authoritative for landing content.
-- Any mismatch between website and `content/content-source.md` must be resolved in favor of `content/content-source.md`.
+## Single Source Of Truth
+- Source file: `LANDING-AUTHPROXY.md`.
+- Normalized runtime source: `content/content-source.json`.
+- If page content differs from source, source wins.
 
-## Scope Of Synchronization
-- Section order
-- Section IDs and anchor links
-- Headlines, body copy, lists, tables
-- Statistics
-- CTA labels and links
-- Navbar labels and targets
+## Content Layer Contracts
+- `content/content-source.json`: all section copy, lists, tables, stats, footer copy.
+- `content/site-map.json`: section order, section id, active visibility.
+- `content/nav-map.json`: navbar labels and anchor links for visible sections only.
+- `content/cta-map.json`: centralized CTA labels, hierarchy and links.
 
-## Synchronization Workflow
-1. Read `content/content-source.md` and parse sections in order.
-2. Read `index.html` and extract:
-   - `section[id]` order
-   - `h1/h2/h3` text
-   - list and table content
-   - CTA button text + href
-   - navbar items + href
-3. Compare parsed structures and produce mismatch report categories:
-   - MATCHED SECTIONS
-   - MISSING SECTIONS
-   - OUTDATED SECTIONS
-   - TEXT MISMATCHES
-   - CTA MISMATCHES
-   - NAVBAR MISMATCHES
-4. Apply updates to `index.html` first (content and structure).
-5. Update `js/main.js` only if selector references or nav counts changed.
-6. Keep CSS visual system intact unless layout changes are required by content.
+## Rendering Rules
+1. Do not hardcode important landing copy in `index.html` or JS components.
+2. Render sections from `content-source.json` using `site-map.json` order.
+3. Render navbar from `nav-map.json` filtered by active visible sections.
+4. Render CTA buttons from `cta-map.json` (hero and closing CTA).
+5. Preserve current classes and layout wrappers to keep visual style unchanged.
 
-## Non-Negotiable Rules
-- Do not invent copy not present in `content/content-source.md`.
-- Do not reorder sections unless MD order changed.
-- Do not keep navbar links that point to missing anchors.
-- Preserve existing visual identity and animation behavior.
+## Validation Rules
+- Every nav `href` target must exist in rendered sections.
+- Every CTA link target must exist in rendered page or be a valid URL.
+- Section order must match `site-map.json`.
+- Section text must match `content-source.json`.
 
-## Validation Checklist
-- All navbar anchors resolve to existing `id`s.
-- Hero and closing CTA labels/links match `content/cta-map.json`.
-- Every section in `content/site-map.md` exists in `index.html` in the same order.
-- No removed MD section remains on page.
+## Sync Workflow
+1. Update `LANDING-AUTHPROXY.md`.
+2. Regenerate/update `content/content-source.json` from MD.
+3. Update maps (`site-map.json`, `nav-map.json`, `cta-map.json`) if structure changed.
+4. Reload page and run audit.

@@ -1,0 +1,22 @@
+[
+  { "key": "hero", "id": null, "className": "hero section section-hero", "active": true },
+  { "key": "problem", "id": "problem", "className": "section section-problem", "active": true },
+  { "key": "how", "id": "how", "className": "section section-dark section-how", "active": true },
+  { "key": "auth", "id": "auth", "className": "section section-auth", "active": true },
+  { "key": "proxy", "id": "proxy", "className": "section section-proxy", "active": true },
+  { "key": "files", "id": "files", "className": "section section-dark section-files-events", "active": true },
+  { "key": "notifications", "id": "notifications", "className": "section section-dark section-files-events", "active": true },
+  { "key": "admin", "id": "admin", "className": "section section-admin", "active": true },
+  { "key": "security", "id": "security", "className": "section section-security", "active": true },
+  { "key": "pwa", "id": "pwa-optimization", "className": "section section-dark section-performance", "active": true },
+  { "key": "mcp", "id": "mcp", "className": "section section-ai", "active": true },
+  { "key": "federation", "id": "federation", "className": "section section-ai", "active": true },
+  { "key": "technical", "id": "technical-specs", "className": "section section-tech", "active": true },
+  { "key": "integration", "id": "integration", "className": "section section-tech", "active": true },
+  { "key": "customization", "id": "form-customization", "className": "section section-dark section-customization", "active": true },
+  { "key": "pricing", "id": "pricing", "className": "section section-pricing", "active": true },
+  { "key": "quickstart", "id": "quickstart", "className": "section section-quickstart", "active": true },
+  { "key": "faq", "id": "faq", "className": "section section-faq", "active": true },
+  { "key": "social_proof", "id": "social-proof", "className": "section section-dark section-proof", "active": true },
+  { "key": "closing_cta", "id": "closing-cta", "className": "section final-cta section-closing", "active": true }
+]
