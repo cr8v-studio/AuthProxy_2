@@ -89,7 +89,7 @@
   },
   "proxy": {
     "headline": "Dynamic Routing. Zero-Downtime Config Changes.",
-    "copy": "Routes are stored in the route_map database table and reloaded every 100 seconds. Add, remove, or modify routes without restarting the server.",
+    "copy": "Routes are stored in the `route_map` database table and reloaded every 100 seconds. Add, remove, or modify routes without restarting the server.",
     "features": [
       "Three route types: SPA/PWA pages, API proxy to backends, internal AuthProxy APIs",
       "Priority-based matching: First URL segment determines route, priorities handle conflicts",
@@ -155,7 +155,7 @@
     },
     "tech_stack": [
       "Bootstrap 5.3.8 + DataTables 2.3.7 (sorting, search, pagination, Excel export)",
-      "PostCore (postcore.js) — unified AJAX with AntiForgery, loading overlay, error handling",
+      "PostCore (`postcore.js`) — unified AJAX with AntiForgery, loading overlay, error handling",
       "All resources local — no CDN dependencies"
     ]
   },
@@ -197,7 +197,7 @@
   },
   "mcp": {
     "headline": "Your Application is AI-Ready From Day One",
-    "copy": "AuthProxy includes a built-in MCP (Model Context Protocol) server at /auth/v1/mcp. AI agents can authenticate, query data, and execute operations through 8 AuthProxy tools + tools from connected modules (51 total across the platform).",
+    "copy": "AuthProxy includes a built-in MCP (Model Context Protocol) server at `/auth/v1/mcp`. AI agents can authenticate, query data, and execute operations through 8 AuthProxy tools + tools from connected modules (51 total across the platform).",
     "levels": {
       "headers": ["Level", "Access", "Use Case"],
       "rows": [
@@ -212,7 +212,7 @@
     "headline": "Multi-Node Deployment & Partner Networks",
     "features": [
       "Partner trust system with public key exchange",
-      "Handshake protocol (/hello endpoint) for partner verification",
+      "Handshake protocol (`/hello` endpoint) for partner verification",
       "Up to 10 parallel instances (node IDs 10-19) for horizontal scaling",
       "Per-node configuration via settings table",
       "Federation admin page for partner management"
@@ -303,11 +303,11 @@
   "quickstart": {
     "headline": "Running in 15 Minutes",
     "steps": [
-      "Pull Docker image → docker pull itbuild/authproxy",
+      "Pull Docker image → `docker pull itbuild/authproxy`",
       "Configure database → Point to SQL Server (Express is free)",
       "Set domain → Configure rpId for cookie binding",
       "Enable auth methods → Toggle in settings table",
-      "Add routes → Map your backend services in route_map",
+      "Add routes → Map your backend services in `route_map`",
       "Deploy → Your PWA is live with full auth"
     ]
   },

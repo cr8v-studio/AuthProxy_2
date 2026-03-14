@@ -15,6 +15,15 @@
       .replaceAll("'", '&#39;');
   }
 
+  function renderInline(text) {
+    const parts = String(text).split('`');
+    return parts
+      .map(function (part, idx) {
+        return idx % 2 === 1 ? `<code>${escapeHtml(part)}</code>` : escapeHtml(part);
+      })
+      .join('');
+  }
+
   function renderTable(headers, rows, firstColStrong) {
     return `
       <div class="table-wrap">
@@ -25,7 +34,7 @@
               .map(function (row) {
                 return `<tr>${row
                   .map(function (cell, idx) {
-                    const text = escapeHtml(cell);
+                    const text = renderInline(cell);
                     return `<td>${firstColStrong && idx === 0 ? `<strong>${text}</strong>` : text}</td>`;
                   })
                   .join('')}</tr>`;
@@ -42,15 +51,20 @@
         const parts = item.split(':');
         if (parts.length > 1) {
           const label = parts.shift();
-          return `<li><strong>${escapeHtml(label)}:</strong>${escapeHtml(parts.join(':'))}</li>`;
+          return `<li><strong>${renderInline(label)}:</strong> ${renderInline(parts.join(':').trim())}</li>`;
         }
-        return `<li>${escapeHtml(item)}</li>`;
+        return `<li>${renderInline(item)}</li>`;
       })
       .join('');
   }
 
   function buildButton(button) {
-    const cls = button.priority === 'primary' ? 'btn btn-primary' : 'btn btn-secondary';
+    const cls =
+      button.priority === 'primary'
+        ? 'btn btn-primary'
+        : button.priority === 'tertiary'
+          ? 'btn btn-secondary btn-tertiary'
+          : 'btn btn-secondary';
     return `<a class="${cls}" href="${escapeHtml(button.href)}">${escapeHtml(button.label)}</a>`;
   }
 
@@ -129,7 +143,7 @@
         <section id="proxy" class="${className}">
           <div class="container">
             <h2>${escapeHtml(content.proxy.headline)}</h2>
-            <p>${escapeHtml(content.proxy.copy)}</p>
+            <p>${renderInline(content.proxy.copy)}</p>
             <ul class="list-tight">${renderStrongList(content.proxy.features)}</ul>
             ${renderTable(content.proxy.comparison.headers, content.proxy.comparison.rows, false)}
           </div>
@@ -142,7 +156,7 @@
           <div class="container">
             <article class="card">
               <h2>${escapeHtml(content.files.headline)}</h2>
-              <ul class="list-tight">${content.files.features.map(function (f) { return `<li>${escapeHtml(f)}</li>`; }).join('')}</ul>
+            <ul class="list-tight">${content.files.features.map(function (f) { return `<li>${renderInline(f)}</li>`; }).join('')}</ul>
             </article>
           </div>
         </section>`;
@@ -203,7 +217,7 @@
           <div class="container">
             <article class="card">
               <h2>${escapeHtml(content.mcp.headline)}</h2>
-              <p>${escapeHtml(content.mcp.copy)}</p>
+              <p>${renderInline(content.mcp.copy)}</p>
               ${renderTable(content.mcp.levels.headers, content.mcp.levels.rows, false)}
               <h3>AuthProxy MCP Tools</h3>
               <p class="tool-list">${escapeHtml(content.mcp.tools)}</p>
@@ -218,7 +232,7 @@
           <div class="container">
             <article class="card">
               <h2>${escapeHtml(content.federation.headline)}</h2>
-              <ul class="list-tight">${content.federation.features.map(function (i) { return `<li>${escapeHtml(i)}</li>`; }).join('')}</ul>
+              <ul class="list-tight">${content.federation.features.map(function (i) { return `<li>${renderInline(i)}</li>`; }).join('')}</ul>
             </article>
           </div>
         </section>`;
@@ -282,15 +296,7 @@
         <section id="quickstart" class="${className}">
           <div class="container">
             <h2>${escapeHtml(content.quickstart.headline)}</h2>
-            <ol class="list-tight">${content.quickstart.steps
-              .map(function (s) {
-                const parts = s.split('→');
-                if (parts.length > 1) {
-                  return `<li>${escapeHtml(parts[0])}→ <code>${escapeHtml(parts.slice(1).join('→').trim())}</code></li>`;
-                }
-                return `<li>${escapeHtml(s)}</li>`;
-              })
-              .join('')}</ol>
+            <ol class="list-tight">${content.quickstart.steps.map(function (s) { return `<li>${renderInline(s)}</li>`; }).join('')}</ol>
           </div>
         </section>`;
     }

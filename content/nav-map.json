@@ -7,8 +7,10 @@
   { "label": "Notifications", "href": "#notifications", "section": "notifications", "active": true },
   { "label": "Admin Panel", "href": "#admin", "section": "admin", "active": true },
   { "label": "Security", "href": "#security", "section": "security", "active": true },
+  { "label": "Tech Specs", "href": "#technical-specs", "section": "technical", "active": true },
+  { "label": "Integration", "href": "#integration", "section": "integration", "active": true },
   { "label": "MCP", "href": "#mcp", "section": "mcp", "active": true },
   { "label": "Pricing", "href": "#pricing", "section": "pricing", "active": true },
   { "label": "FAQ", "href": "#faq", "section": "faq", "active": true },
-  { "label": "Docs", "href": "#quickstart", "section": "quickstart", "active": true }
+  { "label": "Quick Start", "href": "#quickstart", "section": "quickstart", "active": true }
 ]
