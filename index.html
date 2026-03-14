@@ -26,10 +26,16 @@
         <nav id="site-nav" class="site-nav" aria-label="Main">
           <a href="#problem">Problem</a>
           <a href="#how">How it works</a>
-          <a href="#auth">Auth methods</a>
+          <a href="#auth">Authentication</a>
+          <a href="#proxy">Proxy</a>
+          <a href="#files">Files</a>
+          <a href="#notifications">Notifications</a>
+          <a href="#admin">Admin Panel</a>
           <a href="#security">Security</a>
+          <a href="#mcp">MCP</a>
           <a href="#pricing">Pricing</a>
           <a href="#faq">FAQ</a>
+          <a href="#quickstart">Docs</a>
         </nav>
         <div class="nav-controls">
           <div class="lang-switch" role="group" aria-label="Language switcher">
@@ -52,8 +58,8 @@
               11 auth methods, in-memory sessions, rate limiting — all embedded in a single process.
             </p>
             <div class="btn-row">
-              <a class="btn btn-primary" href="#quickstart">Start Building -></a>
-              <a class="btn btn-secondary" href="#admin">View Admin Demo -></a>
+              <a class="btn btn-primary" href="#quickstart">Start Building →</a>
+              <a class="btn btn-secondary" href="#admin">View Admin Demo →</a>
             </div>
           </div>
           <aside class="stats-bar" aria-label="Key product stats">
@@ -88,11 +94,11 @@
         <div class="container">
           <h2>One Process. Five Capabilities.</h2>
             <pre class="diagram" aria-label="Architecture diagram">Internet → AuthProxy (port 443)
-              ├── Authentication (11 methods)
-              ├── Reverse Proxy (dynamic routing)
-              ├── File Service (upload/download/images)
-              ├── Notifications (SSE, Webhooks, Push)
-              └── Admin Panel (13 pages)
+              ├── 🔐 Authentication (11 methods)
+              ├── 🔀 Reverse Proxy (dynamic routing)
+              ├── 📁 File Service (upload/download/images)
+              ├── 📡 Notifications (SSE, Webhooks, Push)
+              └── ⚙️ Admin Panel (13 pages)
                      ↓
               Backend Services (your Core, TrexWallet, Chat, CRM)</pre>
           <p>
@@ -109,57 +115,83 @@
           <div class="card-grid cols-2">
             <article class="card">
               <h3>Cryptographic (Strongest)</h3>
-              <ul class="list-tight">
-                <li><strong>PassKey:</strong> Ed25519 challenge-response, SHA256(phone+password+domain)</li>
-                <li><strong>FIDO2/WebAuthn:</strong> Hardware keys with sign-count anti-cloning</li>
-                <li><strong>UserKey:</strong> Imported Ed25519 hex private key</li>
-              </ul>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Method</th><th>How It Works</th><th>Best For</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>PassKey</strong></td><td>Ed25519 challenge-response, SHA256(phone+password+domain)</td><td>Default login for most users</td></tr>
+                    <tr><td><strong>FIDO2/WebAuthn</strong></td><td>Hardware keys with sign-count anti-cloning</td><td>Enterprise, high-security accounts</td></tr>
+                    <tr><td><strong>UserKey</strong></td><td>Imported Ed25519 hex private key</td><td>Automation, power users</td></tr>
+                  </tbody>
+                </table>
+              </div>
             </article>
             <article class="card">
               <h3>One-Time Passwords</h3>
-              <ul class="list-tight">
-                <li><strong>Phone OTP:</strong> SMS/Messenger delivery, optional account creation</li>
-                <li><strong>Email OTP:</strong> Email with MX validation + Magic Link option</li>
-              </ul>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Method</th><th>How It Works</th><th>Best For</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Phone OTP</strong></td><td>SMS/Messenger delivery, optional account creation</td><td>Mobile-first onboarding</td></tr>
+                    <tr><td><strong>Email OTP</strong></td><td>Email with MX validation + Magic Link option</td><td>Desktop users, enterprise</td></tr>
+                  </tbody>
+                </table>
+              </div>
             </article>
             <article class="card">
               <h3>Social / OAuth</h3>
-              <ul class="list-tight">
-                <li>Google, Telegram, Discord, Facebook, GitHub, VK, Apple</li>
-              </ul>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Method</th><th>How It Works</th><th>Best For</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Google</strong></td><td>JWT validation with ID tokens</td><td>Global audience</td></tr>
+                    <tr><td><strong>Telegram</strong></td><td>HMAC-SHA256 bot-based login</td><td>CIS/crypto communities</td></tr>
+                    <tr><td><strong>Discord</strong></td><td>Code exchange + account linking</td><td>Gaming, communities</td></tr>
+                    <tr><td><strong>Facebook</strong></td><td>Graph API v21.0</td><td>Consumer apps</td></tr>
+                    <tr><td><strong>GitHub</strong></td><td>Code exchange</td><td>Developer tools</td></tr>
+                    <tr><td><strong>VK</strong></td><td>JWT validation</td><td>Russian market</td></tr>
+                    <tr><td><strong>Apple</strong></td><td>JWT + nonce verification</td><td>iOS requirement</td></tr>
+                  </tbody>
+                </table>
+              </div>
             </article>
             <article class="card">
               <h3>AI / Machine</h3>
-              <ul class="list-tight">
-                <li><strong>MCP Basic:</strong> Public key headers, read-only</li>
-                <li><strong>MCP Verified:</strong> Ed25519 timestamp signing</li>
-                <li><strong>MCP App:</strong> Delegated third-party access</li>
-              </ul>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Method</th><th>How It Works</th><th>Best For</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>MCP Basic</strong></td><td>Public key headers, read-only</td><td>AI monitoring agents</td></tr>
+                    <tr><td><strong>MCP Verified</strong></td><td>Ed25519 timestamp signing</td><td>AI trading bots, automation</td></tr>
+                    <tr><td><strong>MCP App</strong></td><td>Delegated third-party access</td><td>Third-party AI integrations</td></tr>
+                  </tbody>
+                </table>
+              </div>
             </article>
           </div>
           <div class="technical-notes">
             <h3>Key Technical Details</h3>
             <ul class="list-tight">
-              <li><strong>Challenge-Response Protocol:</strong> No passwords stored, 2-minute replay-safe TTL</li>
-              <li><strong>In-Memory Sessions:</strong> ConcurrentDictionary O(1), instant revocation</li>
-              <li><strong>Domain Salting:</strong> stolen credentials don't work across domains</li>
-              <li><strong>Timing Protection:</strong> random 50-150ms delay on all auth attempts</li>
+              <li><strong>Challenge-Response Protocol:</strong> No passwords stored. Server generates random challenge → client signs with Ed25519 → server verifies. Replay attacks impossible (2-minute TTL).</li>
+              <li><strong>In-Memory Sessions:</strong> ConcurrentDictionary, O(1) lookup, instant revocation. No Redis, no DB queries on every request.</li>
+              <li><strong>Domain Salting:</strong> Password hash includes domain — stolen credentials don't work on other sites.</li>
+              <li><strong>Timing Protection:</strong> Random 50-150ms delay on all auth attempts prevents timing attacks.</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <section class="section section-proxy">
+      <section id="proxy" class="section section-proxy">
         <div class="container">
           <h2>Dynamic Routing. Zero-Downtime Config Changes.</h2>
-          <p>Routes are stored in the <code>route_map</code> database table and reloaded every 100 seconds.</p>
+          <p>Routes are stored in the <code>route_map</code> database table and reloaded every 100 seconds. Add, remove, or modify routes without restarting the server.</p>
           <ul class="list-tight">
-            <li>Three route types: SPA/PWA, API proxy, internal AuthProxy APIs</li>
-            <li>Priority-based matching and conflict handling</li>
-            <li>Security flags: ScopeCheck, WhiteListIPCheck, GeoIP, NoRateLimit, AppAuthAndCORS</li>
-            <li>Injected headers: X-Crm, X-Scopes, X-Project, X-KeyType, X-Country</li>
-            <li>Per-session rate limiting: 20 request buffer, 1/sec replenish</li>
-            <li><code>/private/*</code> APIs restricted to internal networks</li>
+            <li><strong>Three route types:</strong> SPA/PWA pages, API proxy to backends, internal AuthProxy APIs</li>
+            <li><strong>Priority-based matching:</strong> First URL segment determines route, priorities handle conflicts</li>
+            <li><strong>Security flags per route:</strong> ScopeCheck, WhiteListIPCheck, GeoIP enrichment, NoRateLimit, AppAuthAndCORS</li>
+            <li><strong>Injected headers:</strong> Every proxied request gets X-Crm, X-Scopes, X-Project, X-KeyType, X-Country</li>
+            <li><strong>Rate limiting:</strong> Per-session buffer (20 requests, replenish 1/sec) — built-in DDoS protection</li>
+            <li><strong>IP restriction:</strong> <code>/private/*</code> APIs accessible only from internal networks (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16)</li>
           </ul>
           <div class="table-wrap">
             <table>
@@ -183,8 +215,8 @@
         </div>
       </section>
 
-      <section class="section section-dark section-files-events">
-        <div class="container card-grid cols-2">
+      <section id="files" class="section section-dark section-files-events">
+        <div class="container">
           <article class="card">
             <h2>Secure File Upload, Download &amp; Image Processing</h2>
             <ul class="list-tight">
@@ -195,19 +227,24 @@
               <li>Admin file management: search by owner, filename, size; preview thumbnails; cleanup orphans</li>
             </ul>
           </article>
+        </div>
+      </section>
+
+      <section id="notifications" class="section section-dark section-files-events">
+        <div class="container">
           <article class="card">
             <h2>SSE, Webhooks &amp; Push — All From One Event System</h2>
             <pre class="diagram">Module Events → AuthProxy EventHub (in-memory)
-  ├── SSE → Browser clients
-  ├── Webhooks → External apps
-  └── Push → Mobile devices</pre>
+                  ├── SSE → Browser clients (real-time updates)
+                  ├── Webhooks → External apps (HTTP callbacks)
+                  └── Push → Mobile devices</pre>
             <ul class="list-tight">
-              <li>SSE (Server-Sent Events): real-time browser push with reconnection support and event cache</li>
-              <li>Webhooks: HTTP callbacks to external apps with delivery status tracking and health monitoring</li>
-              <li>Push Notifications: mobile push via system integrations</li>
-              <li>Cross-module events: TrexWallet, Chat, CRM publish events and AuthProxy distributes</li>
-              <li>Event Monitor admin page: real-time visibility into SSE connections and webhook delivery status</li>
-              <li>Email, SMS, Telegram: configurable notification channels</li>
+              <li><strong>SSE (Server-Sent Events):</strong> Real-time browser push with reconnection support and event cache</li>
+              <li><strong>Webhooks:</strong> HTTP callbacks to external apps with delivery status tracking and health monitoring</li>
+              <li><strong>Push Notifications:</strong> Mobile push via system integrations</li>
+              <li><strong>Cross-module events:</strong> TrexWallet, Chat, CRM publish events → AuthProxy distributes</li>
+              <li><strong>Event Monitor admin page:</strong> Real-time visibility into SSE connections, webhook delivery status</li>
+              <li><strong>Email, SMS, Telegram:</strong> Configurable notification channels</li>
             </ul>
           </article>
         </div>
@@ -239,7 +276,12 @@
               </tbody>
             </table>
           </div>
-          <p class="muted">Bootstrap 5.3.8 + DataTables 2.3.7 + PostCore. All resources local, no CDN dependencies.</p>
+          <h3>Tech Stack</h3>
+          <ul class="list-tight">
+            <li>Bootstrap 5.3.8 + DataTables 2.3.7 (sorting, search, pagination, Excel export)</li>
+            <li>PostCore (<code>postcore.js</code>) — unified AJAX with AntiForgery, loading overlay, error handling</li>
+            <li>All resources local — no CDN dependencies</li>
+          </ul>
         </div>
       </section>
 
@@ -253,51 +295,57 @@
               </thead>
               <tbody>
                 <tr><td>Transport</td><td>MITM prevention</td><td>HTTPS + Let's Encrypt auto-renewal</td></tr>
-                <tr><td>Authentication</td><td>Credential theft</td><td>Ed25519 challenge-response</td></tr>
-                <tr><td>Sessions</td><td>Session hijacking</td><td>HttpOnly + SameSite=Strict + in-memory sessions</td></tr>
+                <tr><td>Authentication</td><td>Credential theft</td><td>Ed25519 challenge-response (no passwords stored)</td></tr>
+                <tr><td>Sessions</td><td>Session hijacking</td><td>In-memory + HttpOnly + SameSite=Strict cookies</td></tr>
                 <tr><td>Authorization</td><td>Unauthorized access</td><td>Scope-based permissions, per-route enforcement</td></tr>
-                <tr><td>API</td><td>API abuse</td><td>Per-session rate limiting</td></tr>
-                <tr><td>Internal</td><td>Module isolation</td><td>X-API-Key + IP whitelist for private APIs</td></tr>
-                <tr><td>Audit</td><td>Compliance</td><td>100% login logging with GeoIP</td></tr>
+                <tr><td>API</td><td>API abuse</td><td>Per-session rate limiting (20 req buffer, 1/sec replenish)</td></tr>
+                <tr><td>Internal</td><td>Module isolation</td><td>X-API-Key + IP whitelist for /private/ APIs</td></tr>
+                <tr><td>Audit</td><td>Compliance</td><td>100% login attempt logging with GeoIP</td></tr>
                 <tr><td>DDoS</td><td>Volume attacks</td><td>Client rate limiting + IP blacklisting</td></tr>
               </tbody>
             </table>
           </div>
-          <p class="muted">GDPR support, FIDO2/WebAuthn standards support, configurable CSP.</p>
+          <ul class="list-tight">
+            <li><strong>GDPR:</strong> Audit logging, soft delete, data export capability</li>
+            <li><strong>FIDO2/WebAuthn:</strong> Standards-compliant hardware key support</li>
+            <li><strong>CSP:</strong> Content Security Policy configurable via settings</li>
+          </ul>
         </div>
       </section>
 
-      <section class="section section-dark section-performance">
+      <section id="pwa-optimization" class="section section-dark section-performance">
         <div class="container">
           <h2>3 KB First Load. Works on 3G.</h2>
           <ol class="list-tight">
-            <li>Stage 1 (3 KB): CSS animation and branded loading screen</li>
-            <li>Stage 2 (180 KB): AuthProxy gateway PWA from in-memory cache</li>
-            <li>Stage 3: Full application after authentication</li>
+            <li><strong>Stage 1</strong> (3 KB): CSS animation displays instantly — user sees branded loading screen</li>
+            <li><strong>Stage 2</strong> (180 KB): AuthProxy gateway PWA loads from in-memory cache</li>
+            <li><strong>Stage 3</strong>: Full application loads after authentication</li>
           </ol>
           <ul class="list-tight">
-            <li>In-memory file serving from <code>wwwroot/</code></li>
-            <li>Preload headers, offline Service Worker, gzip/brotli compression</li>
+            <li>In-memory file serving (all wwwroot/ loaded into RAM at startup)</li>
+            <li>Preload headers for parallel resource loading</li>
+            <li>Offline capability via Service Worker</li>
+            <li>Automatic gzip/brotli compression</li>
             <li>Cache busting with proper headers</li>
           </ul>
         </div>
       </section>
 
-      <section class="section section-ai">
-        <div class="container card-grid cols-2">
+      <section id="mcp" class="section section-ai">
+        <div class="container">
           <article class="card">
             <h2>Your Application is AI-Ready From Day One</h2>
             <p>
               Built-in MCP server at <code>/auth/v1/mcp</code>. AI agents can authenticate,
-              query data, and execute operations through 8 AuthProxy tools plus tools from connected modules
+              query data, and execute operations through 8 AuthProxy tools + tools from connected modules
               (51 total across the platform).
             </p>
             <div class="table-wrap">
               <table>
                 <thead><tr><th>Level</th><th>Access</th><th>Use Case</th></tr></thead>
                 <tbody>
-                  <tr><td>McpBasic</td><td>Read-only, public key headers</td><td>Monitoring/reporting</td></tr>
-                  <tr><td>McpVerified</td><td>Full access, Ed25519 signing</td><td>Automation and trading bots</td></tr>
+                  <tr><td>McpBasic</td><td>Read-only, public key headers</td><td>Monitoring dashboards, reporting</td></tr>
+                  <tr><td>McpVerified</td><td>Full access, Ed25519 timestamp signing</td><td>Trading bots, payment automation</td></tr>
                   <tr><td>McpApp</td><td>Delegated third-party access</td><td>Third-party AI integrations</td></tr>
                 </tbody>
               </table>
@@ -308,6 +356,11 @@
               file_upload, file_download, file_list, session_info, user_key_create, user_key_delete
             </p>
           </article>
+        </div>
+      </section>
+
+      <section id="federation" class="section section-ai">
+        <div class="container">
           <article class="card">
             <h2>Multi-Node Deployment &amp; Partner Networks</h2>
             <ul class="list-tight">
@@ -321,8 +374,8 @@
         </div>
       </section>
 
-      <section class="section section-tech">
-        <div class="container card-grid cols-2">
+      <section id="technical-specs" class="section section-tech">
+        <div class="container">
           <article class="card">
             <h2>Technical Specifications</h2>
             <div class="table-wrap">
@@ -330,7 +383,7 @@
                 <thead><tr><th>Component</th><th>Technology</th></tr></thead>
                 <tbody>
                   <tr><td>Runtime</td><td>ASP.NET Core 8+ (C#)</td></tr>
-                  <tr><td>Database</td><td>MS SQL Server (Express - free)</td></tr>
+                  <tr><td>Database</td><td>MS SQL Server (Express — free)</td></tr>
                   <tr><td>Login PWA</td><td>Preact 10.25 (3 KB)</td></tr>
                   <tr><td>Admin UI</td><td>Bootstrap 5.3.8, DataTables 2.3.7, jQuery 3.7.1</td></tr>
                   <tr><td>Real-Time</td><td>SSE + in-process EventHub</td></tr>
@@ -368,6 +421,11 @@
               </table>
             </div>
           </article>
+        </div>
+      </section>
+
+      <section id="integration" class="section section-tech">
+        <div class="container">
           <article class="card">
             <h2>Works With Any Backend</h2>
             <p>
@@ -375,18 +433,18 @@
               Your service receives verified user identity in every request.
             </p>
             <ul class="list-tight">
-              <li>Platform modules: TrexWallet, Chat, CRM</li>
-              <li>Custom Core: .NET, Node.js, Python, Go, Java</li>
+              <li><strong>Platform modules:</strong> TrexWallet, Chat, CRM (REST API)</li>
+              <li><strong>Custom Core:</strong> Any HTTP backend (.NET, Node.js, Python, Go, Java)</li>
               <li>OAuth providers: Google, Discord, Facebook, GitHub, Telegram, VK, Apple</li>
-              <li>Email/SMS: configurable SMTP + SMS providers</li>
-              <li>AI agents: MCP protocol (Claude, GPT, custom)</li>
-              <li>External apps: Webhooks + AppLogin (OAuth-like flow)</li>
+              <li><strong>Email/SMS:</strong> Configurable SMTP + SMS providers</li>
+              <li><strong>AI agents:</strong> MCP protocol (Claude, GPT, custom)</li>
+              <li><strong>External apps:</strong> Webhooks + AppLogin (OAuth-like flow)</li>
             </ul>
           </article>
         </div>
       </section>
 
-      <section class="section section-dark section-customization">
+      <section id="form-customization" class="section section-dark section-customization">
         <div class="container">
           <h2>Three Levels of Login Form Customization</h2>
           <div class="table-wrap">
@@ -395,7 +453,7 @@
               <tbody>
                 <tr><td>Config</td><td>5 minutes</td><td>Set DEFAULT_LOGIN_FORM_ID in settings</td></tr>
                 <tr><td>CSS Theme</td><td>1 hour</td><td>Override --color-active, --border-radius, --shadow-md</td></tr>
-                <tr><td>Custom HTML</td><td>1 day</td><td>Create your own login.html</td></tr>
+                <tr><td>Custom HTML</td><td>1 day</td><td>Create your own login.html with full brand design</td></tr>
               </tbody>
             </table>
           </div>
@@ -406,7 +464,7 @@
       <section id="pricing" class="section section-pricing">
         <div class="container">
           <h2>Pricing / Availability</h2>
-          <p>AuthProxy is the required foundation module of the ItBuild platform and included in every project tier.</p>
+          <p>AuthProxy is the <strong>required foundation module</strong> of the ItBuild platform. It's included in every project tier:</p>
           <div class="table-wrap">
             <table>
               <thead><tr><th>Tier</th><th>Cost</th><th>Includes</th></tr></thead>
@@ -434,11 +492,11 @@
           <h2>Running in 15 Minutes</h2>
           <ol class="list-tight">
             <li>Pull Docker image → <code>docker pull itbuild/authproxy</code></li>
-            <li>Configure database → point to SQL Server (Express is free)</li>
-            <li>Set domain → configure rpId for cookie binding</li>
-            <li>Enable auth methods → toggle in settings table</li>
-            <li>Add routes → map your backend services in <code>route_map</code></li>
-            <li>Deploy → your PWA is live with full auth</li>
+            <li>Configure database → Point to SQL Server (Express is free)</li>
+            <li>Set domain → Configure rpId for cookie binding</li>
+            <li>Enable auth methods → Toggle in settings table</li>
+            <li>Add routes → Map your backend services in <code>route_map</code></li>
+            <li>Deploy → Your PWA is live with full auth</li>
           </ol>
         </div>
       </section>
@@ -450,38 +508,38 @@
             <article class="faq-item" role="listitem">
               <button class="faq-question" aria-expanded="false">Do I need Redis for sessions?</button>
               <div class="faq-answer">
-                <p>No. Sessions are in-memory (ConcurrentDictionary). Faster than Redis, zero infrastructure. Lost on restart, which is acceptable for PWA because users re-login.</p>
+                <p>No. Sessions are in-memory (ConcurrentDictionary). Faster than Redis, zero infrastructure. Lost on restart — acceptable for PWA (users re-login).</p>
               </div>
             </article>
             <article class="faq-item" role="listitem">
               <button class="faq-question" aria-expanded="false">Can I use my own identity provider instead?</button>
               <div class="faq-answer">
-                <p>AuthProxy is your identity provider. No external IdP is required, but you can still use social OAuth alongside native auth.</p>
+                <p>AuthProxy IS your identity provider. No external IdP needed. But you can integrate via OAuth if you want social login alongside native auth.</p>
               </div>
             </article>
             <article class="faq-item" role="listitem">
               <button class="faq-question" aria-expanded="false">What happens if AuthProxy goes down?</button>
               <div class="faq-answer">
-                <p>All requests stop because it is the gateway. For HA, run up to 10 instances with sticky sessions.</p>
+                <p>All requests stop (it's the gateway). For high availability, run up to 10 instances with sticky sessions.</p>
               </div>
             </article>
             <article class="faq-item" role="listitem">
               <button class="faq-question" aria-expanded="false">Is it really more secure than JWT?</button>
               <div class="faq-answer">
-                <p>Challenge-response means there is no token to steal. Sessions revoke instantly in memory, with no stale JWT window. Domain-salted passwords prevent cross-site reuse.</p>
+                <p>Challenge-response means no token to steal. Sessions are revoked instantly (in-memory). No "valid JWT with revoked user" window. Domain-salted passwords prevent cross-site reuse.</p>
               </div>
             </article>
             <article class="faq-item" role="listitem">
               <button class="faq-question" aria-expanded="false">Can I use AuthProxy without other ItBuild modules?</button>
               <div class="faq-answer">
-                <p>Yes. AuthProxy + your custom backend is the minimal setup.</p>
+                <p>Yes. AuthProxy + your custom backend is the minimal setup. TrexWallet, Chat, CRM are all optional.</p>
               </div>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section section-dark section-proof">
+      <section id="social-proof" class="section section-dark section-proof">
         <div class="container">
           <h2>Production Deployments</h2>
           <ul class="list-tight">
@@ -489,11 +547,16 @@
             <li><strong>GekWallet</strong> (web.gekwallet.com) — Live crypto wallet</li>
             <li><strong>TeleStore</strong> (tele.store) — Game app marketplace</li>
           </ul>
-          <p class="muted-light">221 unit tests. 13 pre-built admin pages. 12+ years fintech experience.</p>
+          <h3>Quality Metrics</h3>
+          <ul class="list-tight">
+            <li>221 unit tests</li>
+            <li>13 pre-built admin pages</li>
+            <li>12+ years fintech experience behind the architecture</li>
+          </ul>
         </div>
       </section>
 
-      <section class="section final-cta section-closing">
+      <section id="closing-cta" class="section final-cta section-closing">
         <div class="container">
           <h2>Stop Building Auth Infrastructure. Start Building Your Product.</h2>
           <p>
@@ -501,9 +564,9 @@
             focus on what makes your application unique. Production-ready, battle-tested, zero external dependencies.
           </p>
           <div class="btn-row">
-            <a class="btn btn-primary" href="#pricing">Start Free -></a>
-            <a class="btn btn-secondary" href="#quickstart">Read Documentation -></a>
-            <a class="btn btn-secondary" href="#admin">View Live Demo -></a>
+            <a class="btn btn-primary" href="#pricing">Start Free →</a>
+            <a class="btn btn-secondary" href="#quickstart">Read Documentation →</a>
+            <a class="btn btn-secondary" href="#admin">View Live Demo →</a>
           </div>
         </div>
       </section>
@@ -516,42 +579,6 @@
         <p>Built for PWA and infrastructure teams.</p>
       </div>
     </footer>
-
-    <div
-      id="cookie-banner"
-      class="cookie-banner is-hidden"
-      role="dialog"
-      aria-modal="false"
-      aria-labelledby="cookie-banner-title"
-      aria-describedby="cookie-banner-text"
-      aria-live="polite"
-    >
-      <div class="cookie-banner__icon" aria-hidden="true">
-        <svg viewBox="0 0 48 48" width="48" height="48" focusable="false">
-          <circle cx="24" cy="24" r="20" fill="#8fa6b3"></circle>
-          <circle cx="14" cy="16" r="2.8" fill="#2f3237"></circle>
-          <circle cx="23" cy="12" r="3.2" fill="#2f3237"></circle>
-          <circle cx="31" cy="19" r="2.6" fill="#2f3237"></circle>
-          <circle cx="19" cy="27" r="3.4" fill="#2f3237"></circle>
-          <circle cx="29" cy="30" r="2.8" fill="#2f3237"></circle>
-          <circle cx="12" cy="30" r="2.4" fill="#2f3237"></circle>
-        </svg>
-      </div>
-      <div class="cookie-banner__content">
-        <h2 id="cookie-banner-title" class="cookie-banner__title">Cookie policy applies</h2>
-        <p id="cookie-banner-text" class="cookie-banner__text">
-          Our website uses cookies. The policy objective is to explain how we uses cookies and processes personal data.
-        </p>
-        <div class="cookie-banner__actions">
-          <button type="button" class="cookie-btn cookie-btn--cancel" data-cookie-action="cancel" aria-label="Cancel cookie consent">
-            CANCEL
-          </button>
-          <button type="button" class="cookie-btn cookie-btn--accept" data-cookie-action="accept" aria-label="Accept cookie consent">
-            ACCEPT
-          </button>
-        </div>
-      </div>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>

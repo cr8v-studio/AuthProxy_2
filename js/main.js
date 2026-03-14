@@ -46,52 +46,6 @@
     });
   });
 
-  function initCookieBanner() {
-    const banner = document.getElementById('cookie-banner');
-    if (!banner) return;
-
-    const acceptBtn = banner.querySelector('[data-cookie-action="accept"]');
-    const cancelBtn = banner.querySelector('[data-cookie-action="cancel"]');
-
-    // Persisted consent logic:
-    // accepted => do not show again on future visits.
-    if (localStorage.getItem('cookieConsent') === 'accepted') {
-      banner.classList.add('is-hidden');
-      return;
-    }
-
-    banner.classList.remove('is-hidden');
-    requestAnimationFrame(function () {
-      banner.classList.add('is-visible');
-    });
-
-    function hideBanner() {
-      banner.classList.remove('is-visible');
-      banner.addEventListener(
-        'transitionend',
-        function () {
-          banner.classList.add('is-hidden');
-        },
-        { once: true }
-      );
-    }
-
-    if (acceptBtn) {
-      acceptBtn.addEventListener('click', function () {
-        // Save accepted consent permanently
-        localStorage.setItem('cookieConsent', 'accepted');
-        hideBanner();
-      });
-    }
-
-    if (cancelBtn) {
-      cancelBtn.addEventListener('click', function () {
-        // Session-only dismissal: no localStorage write
-        hideBanner();
-      });
-    }
-  }
-
   function initAuthCardGlow() {
     const targets = document.querySelectorAll('#auth .card, #auth .technical-notes');
     if (!targets.length) return;
@@ -216,7 +170,20 @@
     }
 
     setText('.mobile-nav-toggle', 'Меню');
-    setList('#site-nav a', ['Проблема', 'Как это работает', 'Методы входа', 'Безопасность', 'Тарифы', 'FAQ']);
+    setList('#site-nav a', [
+      'Проблема',
+      'Как это работает',
+      'Аутентификация',
+      'Прокси',
+      'Файлы',
+      'Уведомления',
+      'Админ-панель',
+      'Безопасность',
+      'MCP',
+      'Тарифы',
+      'FAQ',
+      'Доки'
+    ]);
 
     setText('.section-hero .eyebrow', 'AuthProxy для инфраструктурных команд');
     setText('.section-hero h1', 'Аутентификация, маршрутизация и файлы — один модуль, ноль зависимостей');
@@ -278,12 +245,6 @@
 
     setText('.site-footer .footer-grid p:nth-child(2)', 'AuthProxy — аутентификация, маршрутизация, файлы, уведомления.');
     setText('.site-footer .footer-grid p:nth-child(3)', 'Создано для PWA и инфраструктурных команд.');
-    setText('#cookie-banner-title', 'Политика cookie действует');
-    setText(
-      '#cookie-banner-text',
-      'Наш сайт использует cookie. Цель политики — объяснить, как мы используем cookie и обрабатываем персональные данные.'
-    );
-    setList('#cookie-banner .cookie-btn', ['ОТМЕНА', 'ПРИНЯТЬ']);
   }
 
   function setLanguage(lang) {
@@ -310,7 +271,6 @@
 
   const savedLang = localStorage.getItem('authproxy_lang') || 'en';
   setLanguage(savedLang);
-  initCookieBanner();
   initAuthCardGlow();
 
   const heroTitleSelector = '.hero-title-fx';

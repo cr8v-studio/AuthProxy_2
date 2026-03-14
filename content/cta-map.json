@@ -1,0 +1,36 @@
+{
+  "hero": [
+    {
+      "label": "Start Building →",
+      "href": "#quickstart",
+      "priority": "primary",
+      "source": "content-source.md#1-hero-section"
+    },
+    {
+      "label": "View Admin Demo →",
+      "href": "#admin",
+      "priority": "secondary",
+      "source": "content-source.md#1-hero-section"
+    }
+  ],
+  "closing_cta": [
+    {
+      "label": "Start Free →",
+      "href": "#pricing",
+      "priority": "primary",
+      "source": "content-source.md#20-closing-cta"
+    },
+    {
+      "label": "Read Documentation →",
+      "href": "#quickstart",
+      "priority": "secondary",
+      "source": "content-source.md#20-closing-cta"
+    },
+    {
+      "label": "View Live Demo →",
+      "href": "#admin",
+      "priority": "tertiary",
+      "source": "content-source.md#20-closing-cta"
+    }
+  ]
+}
